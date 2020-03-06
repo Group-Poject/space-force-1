@@ -1,0 +1,21 @@
+
+/* Navigation bar styling */
+nav{
+  width: 100vw;
+  height: 75px;
+  background: lightcoral;
+}
+
+/* General container styling */
+main{
+  width: 100vw;
+  height: calc(100vh - 125px);
+  margin: 0 10%;
+}
+
+/* Footer styling */
+footer{
+  width: 100vw;
+  height: 50px;
+  background: lightskyblue;
+}
