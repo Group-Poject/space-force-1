@@ -6,7 +6,7 @@ import routes from './routes';
 
 function App() {
   return (
-    <main>
+    <div>
 
       <Nav />
 
@@ -14,7 +14,7 @@ function App() {
 
       <Footer />
 
-    </main>
+    </div>
   );
 }
 
