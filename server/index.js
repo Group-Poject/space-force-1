@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express'),
       massive = require('massive'),
       session = require('express-session'),
-      ac = require('./controllers/authController'),
+      ac = require('./controllers/AuthCtrl'),
       app = express(),
       path = require('path'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -30,9 +30,9 @@ app.use(
     app.post('/auth/logout', ac.logout)
     // app.get('/auth/user', ac.getUser)
     
-    app.use(express.static(__dirname + '/../build'))
-    app.get('*', (req,res)=> {
-        res.sendFile(path.join(__dirname, '../build/index.html'))
-    })
+    // app.use(express.static(__dirname + '/../build'))
+    // app.get('*', (req,res)=> {
+    //     res.sendFile(path.join(__dirname, '../build/index.html'))
+    // })
     
     app.listen(SERVER_PORT, () => console.log(`Server running on ${SERVER_PORT}`))
