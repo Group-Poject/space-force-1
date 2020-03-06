@@ -28,6 +28,7 @@ class Nav extends Component {
                         <Link to='/calendar'>Calendar</Link>
                         <Link to='/pcare'>Primary Care Physician</Link>
                         <Link to='/profile'>Profile</Link>
+                        {/* <Link to='/logout'>Logout</Link> */}
                     </div> : null}
                 </div>
             </nav>

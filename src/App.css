@@ -54,20 +54,60 @@ nav i {
   overflow: hidden;
 }
 
-.dropdown a{
-  padding: 4px;
-  font-size: 14px;
-  cursor: pointer;
-  text-decoration: none;
-  color: black;
-}
-
 /* General container styling */
 main{
   width: 100vw;
   height: calc(100vh - 150px);
   padding: 16px 200px;
-  background: rgb(65, 65, 50);
+  background: white;
+  display: flex;;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Auth container styling */
+
+.auth-container{
+  width: 700px;
+  height: 90%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 0 32px 16px rgba(128, 128, 128, 0.5);
+}
+
+.login-container{
+  min-width: 700px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all .5s ease;
+}
+
+.register-container{
+  min-width: 700px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all .5s ease;
+}
+
+.left{
+  transform: translateX(-700px);
+}
+
+.login-row{
+  display: flex;
+  width: 250px;
+  justify-content: space-between;
+  margin-top: 16px;
 }
 
 /* Footer styling */
@@ -85,6 +125,23 @@ footer div{
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* General styling */
+button{
+  width: auto;
+  padding: 4px;
+  border: 2px solid black;
+  background: white;
+  cursor: pointer;
+}
+
+a{
+  padding: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 
 /* Animations */
