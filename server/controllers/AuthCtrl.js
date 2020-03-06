@@ -12,10 +12,9 @@ module.exports = {
         }
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
-        let newUser = await db.user.register_customer(email, hash);
+        let newUser = await db.user.register_user(email, hash, phoneNumber, address, birthDate, religiousPreference, bloodType);
 
-        let userCart = await db.cart.create_order(newUser[0].customer_id);
-        let sessionUser = {...newUser[0], ...userCart[0]};
+        let sessionUser = {...newUser[0]};
         session.user = sessionUser;
         res.status(201).send(session.user);
     },
@@ -24,7 +23,7 @@ module.exports = {
               db = req.app.get('db'),
               {session} = req;
 
-        let user = await db.user.check_customer(email);
+        let user = await db.user.check_user(email);
         if(!user[0]){
             return res.status(400).send('User not found')
         }
