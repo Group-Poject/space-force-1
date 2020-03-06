@@ -7,5 +7,9 @@ export const useInputValue = initialValue => {
        ...values,
        [e.target.name]: e.target.value
      })
+    }, () => {
+      for(let key in values){
+        setValues({[key]: ''})
+      }
     }]
   }

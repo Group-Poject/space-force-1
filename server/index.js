@@ -3,6 +3,7 @@ const express = require('express'),
       massive = require('massive'),
       session = require('express-session'),
       ac = require('./controllers/AuthCtrl'),
+      AllergyCtrl=require('./controllers/AllergyCtrl'),
       app = express(),
       path = require('path'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -24,6 +25,12 @@ app.use(
     
     
     //endpoints
+    //Allergy endpoints
+    app.get('/api/allergies', AllergyCtrl.getAllergies)
+    app.post('/api/addAllergy', AllergyCtrl.addAllergy)
+    app.put('/api/editAllergy/:id', AllergyCtrl.editAllergy)
+    app.delete('api/deleteAllergy/:id', AllergyCtrl.deleteAllergy)
+
     //auth
     app.post('/auth/register', ac.register)
     app.post('/auth/login', ac.login)
