@@ -1,23 +1,31 @@
 import React, {useState} from 'react';
+import { useInputValue } from '../hooks/useInputValue';
 
 const Allergies = props => {
-    const [inputs, setInputs]=useState();
-    
+    // const [inputs, setInputs]=useState({allergy_name: '', allergy_desc: '', diagnose_date: ''});
+    const [{allergy_name, allergy_desc, diagnose_date}, setValues]=useInputValue({
+        allergy_name: '',
+        allergy_desc: '',
+        diagnose_date: ''
+    })
         return(
             <main>
                 Allergies
                 <div>
                     <input 
                     placeholder='Allergy Name'
-                    // value={inputs.allergy_name}
+                    value={allergy_name}
+                    onChange={setValues}
                     />
                     <input 
                     placeholder='Allergy Description'
-                    // value={inputs.allergy_desc}
+                    value={allergy_desc}
+                    onChange={setValues}
                     />
                     <input 
                     placeholder='Diagnose Date'
-                    // value={inputs.diagnose_date}
+                    value={diagnose_date}
+                    onChange={setValues}
                     />
                     <button>Add New</button>
                 </div>
