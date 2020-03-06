@@ -18,7 +18,7 @@ export default (
         <Route exact path='/' component={Auth} />
         <Route path='/dashboard' component={Dashboard} />
         <Route path='/meds' component={Meds} />
-        <Route path='/pcare' component={Pcare} />
+        <Route path='/primary-care' component={Pcare} />
         <Route path='/allergies' component={Allergies} />
         <Route path='/calendar' component={Calendar} />
         <Route path='/first-responder' component={FRview} />
