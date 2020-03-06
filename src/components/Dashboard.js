@@ -8,7 +8,9 @@ class Dashboard extends Component {
             year: 0,
             day: 0,
             monthDisplay: false,
-            yearDisplay: false
+            yearDisplay: false,
+            months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+            days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
         }
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -41,67 +43,71 @@ class Dashboard extends Component {
     }
 
     render(){
-        const {month, year, day, monthDisplay, yearDisplay} = this.state;
+        const {month, months, year, day, monthDisplay, yearDisplay} = this.state;
         return(
             <main>
 
-                <section >
+                <section>
                     <div>
-                        {
-                            monthDisplay
-                            ?
-                            <div onClick={this.displayMonths}>
-                                {month}
-                                <span onClick={this.futureMonth(month + 1)}>{month + 1}</span>
-                            </div>
-                            :
-                            <div onClick={this.displayMonths}>{month}</div>
-                        }
+                        <div>
+                            {
+                                monthDisplay
+                                ?
+                                <div onClick={this.displayMonths}>
+                                    {months[month - 1]}
+                                    {/* <span onClick={this.futureMonth(month + 1)}>{month + 1}</span> */}
+                                </div>
+                                :
+                                <div onClick={this.displayMonths}>{months[month - 1]}</div>
+                            }
+                        </div>
+
+                        <div>
+                            {
+                                yearDisplay
+                                ?
+                                <div onClick={this.displayYears}>
+                                    {year}
+                                </div>
+                                :
+                                <div onClick={this.displayYears}>{year}</div>
+                            }
+                        </div>
+
+                        <div>
+                            {day}
+                        </div>
+
+                        <div>back arrow</div>
+                        <div>forward arrow</div>
                     </div>
+                    <container className='todays-meds'>
+                        todays meds
+                    </container>
 
-                    <div>
-                        {
-                            yearDisplay
-                            ?
-                            <div onClick={this.displayYears}>
-                                {year}
-                            </div>
-                            :
-                            <div onClick={this.displayYears}>{year}</div>
-                        }
-                    </div>
-
-                    <div>
-                        {day}
-                    </div>
-
-                    <div>back arrow</div>
-                    <div>forward arrow</div>
-
-                    <container>todays meds</container>
 
                 </section>
+                <section>
+                    <container>
+                        pcare
+                    </container>
 
-                <container>
-                    pcare
-                </container>
+                    <container>
+                        meds
+                    </container>
 
-                <container>
-                    meds
-                </container>
+                    <container>
+                        allergies
+                    </container>
 
-                <container>
-                    allergies
-                </container>
+                    <container>
+                        surgeries
+                    </container>
 
-                <container>
-                    surgeries
-                </container>
-
-                <container>
-                    medical history fam and personal
-                </container>
-
+                    <container>
+                        medical history fam and personal
+                    </container>
+                </section>
             </main>
         )
     }

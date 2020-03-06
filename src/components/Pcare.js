@@ -16,7 +16,7 @@ const PCare = props => {
     address: ""
   });
 
-  addProvider = (
+  const addProvider = (
     patientId,
     firstName,
     lastName,
@@ -40,10 +40,16 @@ const PCare = props => {
   };
 
   return (
-    <main>
-      <button onClick={setShowAdd(!showAdd)}>Add Provider</button>
-      <div>name | address| etc</div>
-      <div>map</div>
+    <main id='provider-main'>
+      <button onClick={() => setShowAdd(!showAdd)}>Add Provider</button>
+      <div className='prov-info-container'>
+        <div>
+            <p>Name</p>    
+            <p>Address</p>    
+            <p>Etc</p>    
+        </div>
+        <div>map</div>
+      </div>
       {showAdd && (
         <div>
           <input
@@ -76,7 +82,7 @@ const PCare = props => {
             value={address}
             onChange={setValues}
           />
-          <button onClick={} >Submit</button>
+          <button >Submit</button>
         </div>
       )}
     </main>

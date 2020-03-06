@@ -3,12 +3,15 @@ import React from 'react';
 const MedHistory = props => {
     
         return(
-            <main>
-                Medical History
+            <main id='medical-history-main'>
                 <div>
-                    <p>Date</p>
-                    <p>Condition</p>
-                    <p>Description</p>
+                    <p>Medical History</p>
+                    <div>
+                        <p>Date</p>
+                        <p>Condition</p>
+                        <p>Description</p>
+
+                    </div>
                 </div>
             </main>
         )
