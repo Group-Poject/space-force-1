@@ -3,8 +3,7 @@ import React from 'react';
 const Profile = props => {
     
         return(
-            <main>
-                Profile
+            <main id='profile-container-main'>
                 <div>
                     <p>Name: </p>
                     <p>Email: </p>
@@ -17,7 +16,27 @@ const Profile = props => {
                     <button>Edit</button>
                 </div>
                 <div>
-                    Emergency Contacts
+                    <p>Emergency Contacts</p>
+                    <div className='e-contact-card'>
+                        <p>Name:</p>
+                        <p>Email:</p>
+                        <p>Relationship:</p>
+                    </div>
+                    <div className='e-contact-card'>
+                        <p>Name:</p>
+                        <p>Email:</p>
+                        <p>Relationship:</p>
+                    </div>
+                    <div className='e-contact-card'>
+                        <p>Name:</p>
+                        <p>Email:</p>
+                        <p>Relationship:</p>
+                    </div>
+                    <div className='e-contact-card'>
+                        <p>Name:</p>
+                        <p>Email:</p>
+                        <p>Relationship:</p>
+                    </div>
                 </div>
             </main>
         )
