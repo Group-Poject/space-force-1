@@ -10,6 +10,8 @@ import FRview from './components/FRview';
 import MedHistory from './components/MedHistory';
 import Surgeries from './components/Surgeries';
 import Profile from './components/Profile';
+import About from './components/About';
+import Contact from './components/Contact';
 
 export default (
     <Switch>
@@ -23,5 +25,7 @@ export default (
         <Route path='/med-history' component={MedHistory} />
         <Route path='/surgeries' component={Surgeries} />
         <Route path='/profile' component={Profile} />
+        <Route path='/about' component={About} />
+        <Route path='/contact' component={Contact} />
     </Switch>
 )
