@@ -1,21 +1,94 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 
 /* Navigation bar styling */
 nav{
   width: 100vw;
   height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 150px;
   background: lightcoral;
+}
+
+nav div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 250px;
+}
+
+nav i {
+  cursor: pointer;
+}
+
+.icons{
+  width: 150px;
+}
+
+.fa-clinic-medical, .fa-ambulance{
+  font-size: 36px;
+}
+
+.fa-bars{
+  font-size: 26px;
+}
+
+.dropdown{
+  width: 250px;
+  height: 250px;
+  position: absolute;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 8px 16px;
+  top: 75px;
+  background: lightyellow;
+  animation: drop-down .25s;
+  overflow: hidden;
+}
+
+.dropdown a{
+  padding: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
 }
 
 /* General container styling */
 main{
   width: 100vw;
-  height: calc(100vh - 125px);
-  margin: 0 10%;
+  height: calc(100vh - 150px);
+  padding: 16px 200px;
+  background: rgb(65, 65, 50);
 }
 
 /* Footer styling */
 footer{
   width: 100vw;
-  height: 50px;
+  height: 75px;
+  display: flex;
+  justify-content: center;
   background: lightskyblue;
+}
+
+footer div{
+  width: 250px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Animations */
+@keyframes drop-down {
+  0%{height: 0;}
+  100%{height: 250px;}
 }
