@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router-dom';
 
 class Dashboard extends Component {
     constructor(){
@@ -31,10 +32,6 @@ class Dashboard extends Component {
         });
     }
 
-    futureMonth = (month) => {
-        this.setState({month: month});
-    }
-
     displayMonths = () => {
         this.setState({monthDisplay: !this.state.monthDisplay});
     }
@@ -44,6 +41,15 @@ class Dashboard extends Component {
 
     render(){
         const {month, months, year, day, monthDisplay, yearDisplay} = this.state;
+        const displayMonths = months.map((e, i) => {
+            return(
+                <div key={i} onClick={() => {
+                    this.setState({month: i + 1})
+                    this.displayMonths()}}>
+                    {e}
+                </div>
+            )
+        })
         return(
             <main>
 
@@ -55,10 +61,10 @@ class Dashboard extends Component {
                                 ?
                                 <div onClick={this.displayMonths}>
                                     {months[month - 1]}
-                                    {/* <span onClick={this.futureMonth(month + 1)}>{month + 1}</span> */}
+                                    {displayMonths}
                                 </div>
                                 :
-                                <div onClick={this.displayMonths}>{months[month - 1]}</div>
+                                <div onClick={() => this.displayMonths()}>{months[month - 1]}</div>
                             }
                         </div>
 
@@ -85,28 +91,40 @@ class Dashboard extends Component {
                         todays meds
                     </container>
 
-
                 </section>
+
                 <section>
+
+                    <Link to='/primary-care'>
                     <container>
                         pcare
                     </container>
+                    </Link>
 
+                    <Link to='/meds'>
                     <container>
                         meds
                     </container>
+                    </Link>
 
+                    <Link to='/allergies'>
                     <container>
                         allergies
                     </container>
+                    </Link>
 
+                    <Link to='/surgeries'>
                     <container>
                         surgeries
                     </container>
+                    </Link>
 
+                    <Link to='/med-history'>
                     <container>
                         medical history fam and personal
                     </container>
+                    </Link>
+
                 </section>
             </main>
         )
