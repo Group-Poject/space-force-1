@@ -1,0 +1,1 @@
+select * from family_medical_history;
