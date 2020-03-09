@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {getUser} from '../redux/userReducer';
 
 class FRview extends Component {
     constructor(){
@@ -27,37 +29,37 @@ class FRview extends Component {
     }
 
     getPatientInfo = () => {
-        axios.get('/patient-info')
+        axios.get(`/patient-info${this.props.user.patient_id}`)
         .then(res => {this.setState({patientInfo: res.data})})
         .catch(err => console.log(err));
     }
     getPCareInfo = () => {
-        axios.get('/pcare-info')
+        axios.get(`/pcare-info${this.props.user.patient_id}`)
         .then(res => {this.setState({pCare: res.data})})
         .catch(err => console.log(err));
     }
     getAllergyInfo = () => {
-        axios.get('/allergy-info')
+        axios.get(`/allergy-info${this.props.user.patient_id}`)
         .then(res => {this.setState({allergies: res.data})})
         .catch(err => console.log(err));
     }
     getMedsInfo = () => {
-        axios.get('/meds-info')
+        axios.get(`/meds-info${this.props.user.patient_id}`)
         .then(res => {this.setState({meds: res.data})})
         .catch(err => console.log(err));
     }
     getSurgeryInfo = () => {
-        axios.get('/surgery-info')
+        axios.get(`/surgery-info${this.props.user.patient_id}`)
         .then(res => {this.setState({surgeries: res.data})})
         .catch(err => console.log(err));
     }
     getPatientHistory = () => {
-        axios.get('/patient-history-info')
+        axios.get(`/patient-history-info${this.props.user.patient_id}`)
         .then(res => {this.setState({patientHistory: res.data})})
         .catch(err => console.log(err));
     }
     getFamHistory = () => {
-        axios.get('/fam-history-info')
+        axios.get(`/fam-history-info${this.props.user.patient_id}`)
         .then(res => {this.setState({famHistory: res.data})})
         .catch(err => console.log(err));
     }
@@ -151,4 +153,8 @@ class FRview extends Component {
     }
 }
 
-export default FRview;
+const mapStateToProps = state => {
+    return state
+}
+
+export default connect(mapStateToProps, {getUser})(FRview);

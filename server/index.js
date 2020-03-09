@@ -6,6 +6,7 @@ const express = require('express'),
       AllergyCtrl=require('./controllers/AllergyCtrl'),
       MedsCtrl=require('./controllers/MedsCtrl'),
       SurgeryCtrl=require('./controllers/SurgeryCtrl'),
+      FRCtrl = require('./controllers/FRCtrl'),
       app = express(),
       path = require('path'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -44,6 +45,15 @@ app.use(
     app.post('/api/addSurgery', SurgeryCtrl.addSurgery)
     app.put('/api/editSurgery/:id', SurgeryCtrl.editSurgery)
     app.delete('/api/deleteSurgery/:id', SurgeryCtrl.deleteSurgery)
+
+    //First Responder endpoints
+    app.get('/patient-info', FRCtrl.getPatientInfo);
+    app.get('/pcare-info', FRCtrl.getPCareInfo);
+    app.get('/allergy-info', FRCtrl.getAllergyInfo);
+    app.get('/meds-info', FRCtrl.getMedsInfo);
+    app.get('/surgery-info', FRCtrl.getSurgeryInfo);
+    app.get('/patient-history-info', FRCtrl.getPatientHistory);
+    app.get('/fam-history-info', FRCtrl.getFamHistory);
 
     //auth
     app.post('/auth/register', ac.register)
