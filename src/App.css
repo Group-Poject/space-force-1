@@ -201,10 +201,47 @@ container{
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.calendar{
+  width: 100%;
+  height: 100%;
+  padding: 16px;
+}
+
+tbody{
+  display: block;
+  width: 100%;
+  height: calc(100% - 50px);
   border: 1px solid black;
 }
 
-.calendar-labels{
+thead{
+  height: 50px;
+}
+
+tr{
+  width: 100px;
+}
+
+.day{
+  width: 120px;
+  height: 75px;
+  padding: 4px;
+  text-align: center;
+  border: 1px solid black;
+}
+
+.nav-month{
+  position: absolute;
+  left: 348px;
+}
+
+.nav-month i{
+  cursor: pointer
+}
+
+.calendar-header{
   height: 50px;
   width: 100%;
   display: flex;
@@ -224,10 +261,43 @@ container{
   flex-wrap: wrap;
 }
 
-.calendar div{
-  width: 14.285714%;
-  height: auto;
-  border: 1px solid purple;
+.current-day{
+  background: rebeccapurple;
+}
+
+.legend{
+  position: absolute;
+  display: flex;
+  right: 220px;
+}
+
+.legend p{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 4px;
+  font-size: 12px;
+}
+
+.legend p span{
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin: 4px;
+  line-height: 12px;
+}
+
+.color1{
+  background: black;
+}
+
+.color2{
+  background: white;
+}
+
+.color3{
+  background: rgb(192, 21, 21);
 }
 
 /* Medical History Styling */
