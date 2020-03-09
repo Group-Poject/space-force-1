@@ -1,0 +1,1 @@
+select * from personal_medical_history;
