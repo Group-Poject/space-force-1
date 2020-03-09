@@ -1,0 +1,1 @@
+select * from primary_care_physician;
