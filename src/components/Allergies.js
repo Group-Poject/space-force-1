@@ -27,7 +27,6 @@ const Allergies = props => {
                     })
                             .catch(err=>console.log(err))}}
                     }>
-
                     <input 
                     name='allergy_name'
                     placeholder='Allergy Name'
