@@ -3,7 +3,18 @@
   padding: 0;
   box-sizing: border-box;
   transition: all .5s ease;
+  color: black;
 }
+/* 
+colors:
+Deep Space Sparkle: #385F71
+Captain Red: #B80C09
+Apricot: #FAC9B8
+Misty Rose: FFE5D8
+Onyx: #313638 
+green: #699677
+other green: #C3DEB7*/
+
 
 
 /* Navigation bar styling */
@@ -14,7 +25,8 @@ nav{
   justify-content: space-between;
   align-items: center;
   padding: 0 150px;
-  background: lightcoral;
+  background: #669677;
+  color: #FFE5D8
 }
 
 nav div{
@@ -26,6 +38,7 @@ nav div{
 
 nav i {
   cursor: pointer;
+  color: #FFE5D8
 }
 
 .icons{
@@ -61,7 +74,7 @@ main{
   width: 100vw;
   height: calc(100vh - 150px);
   padding: 16px 200px;
-  background: white;
+  background: #FFE5D8;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -211,19 +224,37 @@ container{
   padding: 16px;
 }
 
-tbody{
+.tbody{
   display: block;
   width: 100%;
   height: calc(100% - 50px);
-  border: 1px solid black;
 }
 
-thead{
+.thead{
   height: 50px;
+  width: 100%;
 }
 
-tr{
-  width: 100px;
+.tr{
+  width: 100%;
+  height: 14.666666%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.tr:nth-of-type(2n+1){
+  background: #FFE5D8;
+}
+
+.tr-head{
+  width: 100%;
+  height: 25px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.tr:last-of-type{
+  justify-content: flex-start;
 }
 
 .dayweek-day{
@@ -239,19 +270,37 @@ tr{
 
 
 .nav-month{
-  position: absolute;
-  left: 348px;
+  min-width: 150px;
+  width: 15%;
+  height: auto;
+  z-index: 500;
+  position: relative;
+  border: 2px solid black;
+  top: 0;
+  left: 0;
+  padding: 0 4px;
 }
 
 .nav-month i{
   cursor: pointer
 }
 
+.dropdown{
+  height: auto;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
+k{
+  cursor: pointer;
+}
+
 .calendar-header{
   height: 50px;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -262,19 +311,19 @@ tr{
 
 .calendar{
   height: calc(100% - 0px);
-  background: darkorange;
+  background: #385F71;
   display: flex;
   flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .current-day{
-  background: rebeccapurple;
+  border: 2px solid #699677;
+  color: #699677;
 }
 
 .legend{
-  position: absolute;
   display: flex;
-  right: 220px;
 }
 
 .legend p{
@@ -307,10 +356,9 @@ tr{
 }
 
 .week-day{
-  width: 120px;
-  height: 75px;
+  width: 14.2857142857%;
+  height: 100%;
   text-align: center;
-  border: 1px solid black;
   transition: all .5s ease;
 }
 
@@ -358,7 +406,6 @@ tr{
   width: 50%;
   height: 50%;
   background: white;
-  transition: all .5s ease;
 }
 
 /* Medical History Styling */
@@ -423,7 +470,7 @@ footer{
   height: 75px;
   display: flex;
   justify-content: center;
-  background: lightskyblue;
+  background: #313638;
 }
 
 footer div{
@@ -432,6 +479,7 @@ footer div{
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #FFE5d8;
 }
 
 /* General styling */
@@ -457,7 +505,7 @@ a{
   font-size: 14px;
   cursor: pointer;
   text-decoration: none;
-  color: black;
+  color: #FFE5D8
 }
 
 /* Animations */
