@@ -1,1 +1,2 @@
-select * from allergies;
+select * from allergies
+where patient_id = $1;
