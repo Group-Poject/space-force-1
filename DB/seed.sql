@@ -1,6 +1,6 @@
 create table patients (
     patient_id serial primary key,
-    frist_name varchar(150) not null,
+    first_name varchar(150) not null,
     last_name varchar(150) not null,
     email varchar (150) not null,
     password varchar(500) not null,
