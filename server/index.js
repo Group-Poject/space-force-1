@@ -4,6 +4,8 @@ const express = require('express'),
       session = require('express-session'),
       ac = require('./controllers/AuthCtrl'),
       AllergyCtrl=require('./controllers/AllergyCtrl'),
+      MedsCtrl=require('./controllers/MedsCtrl'),
+      SurgeryCtrl=require('./controllers/SurgeryCtrl'),
       app = express(),
       path = require('path'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -30,6 +32,18 @@ app.use(
     app.post('/api/addAllergy', AllergyCtrl.addAllergy)
     app.put('/api/editAllergy/:id', AllergyCtrl.editAllergy)
     app.delete('api/deleteAllergy/:id', AllergyCtrl.deleteAllergy)
+
+    //Medicine endpoints
+    app.get('/api/medicines', MedsCtrl.getMedicines)
+    app.post('/api/addMedicine', MedsCtrl.addMedicine)
+    app.put('/api/editMedicine/:id', MedsCtrl.editMedicine)
+    app.delete('/api/deleteMedicine/:id', MedsCtrl.deleteMedicine)
+
+    //Surgery endpoints
+    app.get('/api/surgeries', SurgeryCtrl.getSurgeries)
+    app.post('/api/addSurgery', SurgeryCtrl.addSurgery)
+    app.put('/api/editSurgery/:id', SurgeryCtrl.editSurgery)
+    app.delete('/api/deleteSurgery/:id', SurgeryCtrl.deleteSurgery)
 
     //auth
     app.post('/auth/register', ac.register)
