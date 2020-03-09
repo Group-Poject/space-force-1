@@ -84,15 +84,15 @@ export default class Calendar extends React.Component {
         let popup = props.data.map((data) => {
             return (
                 <div key={data}>
-                    <button  onClick={(e)=> {this.onSelectChange(e, data)}}>
+                    <k  onClick={(e)=> {this.onSelectChange(e, data)}}>
                         {data}
-                    </button>
+                    </k>
                 </div>
             );
         });
 
         return (
-            <div className="month-popup">
+            <div className="dropdown">
                 {popup}
             </div>
         );
@@ -180,15 +180,15 @@ export default class Calendar extends React.Component {
         console.log(this.state.monthsArray[this.state.dateContext.month()])
         let weekdays = this.weekdaysShort.map((day, i) => {
             return (
-                <td key={day} className="weekday-header" >{day}</td>
+                <div key={day} className="weekday-header" >{day}</div>
             )
         });
 
         let blanks = [];
         for (let i = 0; i < this.firstDayOfMonth(); i++) {
-            blanks.push(<td key={i * 80} className="emptySlot">
+            blanks.push(<div key={i * 80} className="emptySlot">
                 {""}
-                </td>
+                </div>
             );
         }
 
@@ -200,11 +200,11 @@ export default class Calendar extends React.Component {
             let className = (d == this.currentDay() && newDate.getMonth() === this.state.dateContext.month() && +this.year() === +newDate.getFullYear() ? "day current-day": "day");
             let selectedClass = (d == this.state.selectedDay ? " week-day zoom " : " week-day")
             daysInMonth.push(
-                <td key={d} className={className + selectedClass} >
+                <div key={d} className={className + selectedClass} >
                     <span onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
                     {this.state.selectedDay ? 
                     <p onClick={() => this.setState({selectedDay: null})}>X</p> : null }
-                </td>
+                </div>
             );
         }
         console.log("days: ", daysInMonth);
@@ -229,25 +229,25 @@ export default class Calendar extends React.Component {
         });
 
         let trElems = rows.map((d, i) => {
-            return (
-                <tr key={i*100}>
+            return i > 0 ? 
+            (
+                <div className='tr' key={i*100}>
                     {d}
-                </tr>
-            );
+                </div>
+            ) : null;
         })
 
         return (
             <main>
             <div className="calendar-container">
-                <table className="calendar">
-                    <thead>
-                        <tr className="calendar-header">
-                            <td>
+                <div className="calendar">
+                        <div className="calendar-header">
+                            <div className='nav-month'>
                                 <this.MonthNav />
                                 {" "}
                                 <this.YearNav />
-                            </td>
-                            <td className="nav-month">
+                            </div>
+                            <div>
                                 <i className="prev fa fa-fw fa-chevron-left"
                                     onClick={(e)=> {this.prevMonth()}}>
                                 </i>
@@ -255,22 +255,21 @@ export default class Calendar extends React.Component {
                                     onClick={(e)=> {this.nextMonth()}}>
                                 </i>
 
-                            </td>
-                            <td className='legend'>
+                            </div>
+                            <div className='legend'>
                                 <p>Legend:</p>
                                 <p><span className='color1'></span>Today</p>
                                 <p><span className='color2'></span>Medications</p>
                                 <p><span className='color3'></span>Appointments</p>
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+                            </div>
+                        </div>
+                    <div className='tbody'>
+                        <div className='tr-head'>
                             {weekdays}
-                        </tr>
+                        </div>
                         {trElems}
-                    </tbody>
-                </table>
+                    </div>
+                </div>
 
             </div>
             </main>
