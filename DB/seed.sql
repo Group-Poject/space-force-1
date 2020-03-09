@@ -71,17 +71,17 @@ create table personal_medical_history (
     cond_desc varchar(600)
 );
 
-create table calendar (
-    cal_entry_id serial primary key,
-    patient_id int references patients(patient_id),
-    medication_id varchar(150) references medications(medication_id),
-    appointment_id varchar(300) references appointments(appointment_id)
-);
-
 create table appointments (
     appointment_id serial primary key,
     date varchar(150),
     time time,
-    desc varchar(600),
+    appt_desc varchar(600),
     appt_address varchar(300)
+);
+
+create table calendar (
+    cal_entry_id serial primary key,
+    patient_id int references patients(patient_id),
+    medication_id int references medications(medication_id),
+    appointment_id int references appointments(appointment_id)
 );
