@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import moment from 'moment';
 
 export default class Calendar extends React.Component {
@@ -8,7 +8,9 @@ export default class Calendar extends React.Component {
         showMonthPopup: false,
         showYearPopup: false,
         selectedDay: null,
-        monthsArray: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        monthsArray: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+        zoomToggle: 'week-day zoom'
+
     }
 
     constructor(props) {
@@ -82,9 +84,9 @@ export default class Calendar extends React.Component {
         let popup = props.data.map((data) => {
             return (
                 <div key={data}>
-                    <a href="#" onClick={(e)=> {this.onSelectChange(e, data)}}>
+                    <button  onClick={(e)=> {this.onSelectChange(e, data)}}>
                         {data}
-                    </a>
+                    </button>
                 </div>
             );
         });
@@ -172,12 +174,13 @@ export default class Calendar extends React.Component {
         this.props.onDayClick && this.props.onDayClick(e, day);
     }
 
+
     render() {
         console.log(this.month())
         console.log(this.state.monthsArray[this.state.dateContext.month()])
-        let weekdays = this.weekdaysShort.map((day) => {
+        let weekdays = this.weekdaysShort.map((day, i) => {
             return (
-                <td key={day} className="week-day">{day}</td>
+                <td key={day} className="weekday-header" >{day}</td>
             )
         });
 
@@ -193,13 +196,14 @@ export default class Calendar extends React.Component {
 
         let daysInMonth = [];
         let newDate = new Date();
-        console.log(newDate.getFullYear())
         for (let d = 1; d <= this.daysInMonth(); d++) {
             let className = (d == this.currentDay() && newDate.getMonth() === this.state.dateContext.month() && +this.year() === +newDate.getFullYear() ? "day current-day": "day");
-            let selectedClass = (d == this.state.selectedDay ? " selected-day " : "")
+            let selectedClass = (d == this.state.selectedDay ? " week-day zoom " : " week-day")
             daysInMonth.push(
                 <td key={d} className={className + selectedClass} >
                     <span onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
+                    {this.state.selectedDay ? 
+                    <p onClick={() => this.setState({selectedDay: null})}>X</p> : null }
                 </td>
             );
         }
