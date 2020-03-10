@@ -17,6 +17,6 @@ insert into patients (
     $6,
     $7,
     $8,
-    $9,
+    $9
 )
 returning *;
