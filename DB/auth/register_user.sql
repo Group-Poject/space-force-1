@@ -7,8 +7,7 @@ insert into patients (
     address,
     birth_date,
     religious_preference,
-    blood_type,
-    is_patient
+    blood_type
 ) values (
     $1,
     $2,
@@ -19,6 +18,5 @@ insert into patients (
     $7,
     $8,
     $9,
-    true
 )
 returning *;

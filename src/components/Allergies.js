@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useInputValue } from '../hooks/useInputValue';
 import axios from 'axios';
-import {connect} from ''
+// import {connect} from ''
 
 
 const Allergies = props => {
