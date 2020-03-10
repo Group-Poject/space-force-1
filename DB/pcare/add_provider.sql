@@ -8,5 +8,4 @@ insert into primary_care_physician (
     $2,
     $3,
     $4
-)
-returning *;
+);
