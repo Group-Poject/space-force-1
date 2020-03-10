@@ -7,6 +7,7 @@ const express = require('express'),
       MedsCtrl=require('./controllers/MedsCtrl'),
       SurgeryCtrl=require('./controllers/SurgeryCtrl'),
       FRCtrl = require('./controllers/FRCtrl'),
+      MedHistoryCtrl = require('./controllers/MedHistoryCtrl'),
       app = express(),
       path = require('path'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -29,13 +30,13 @@ app.use(
     
     //endpoints
     //Allergy endpoints
-    app.get('/api/allergies', AllergyCtrl.getAllergies)
+    app.get('/api/allergies:id', AllergyCtrl.getAllergies)
     app.post('/api/addAllergy', AllergyCtrl.addAllergy)
     app.put('/api/editAllergy/:id', AllergyCtrl.editAllergy)
     app.delete('api/deleteAllergy/:id', AllergyCtrl.deleteAllergy)
 
     //Medicine endpoints
-    app.get('/api/medicines', MedsCtrl.getMedicines)
+    app.get('/api/medicines:id', MedsCtrl.getMedicines)
     app.post('/api/addMedicine', MedsCtrl.addMedicine)
     app.put('/api/editMedicine/:id', MedsCtrl.editMedicine)
     app.delete('/api/deleteMedicine/:id', MedsCtrl.deleteMedicine)
@@ -47,13 +48,17 @@ app.use(
     app.delete('/api/deleteSurgery/:id', SurgeryCtrl.deleteSurgery)
 
     //First Responder endpoints
-    app.get('/patient-info', FRCtrl.getPatientInfo);
-    app.get('/pcare-info', FRCtrl.getPCareInfo);
-    app.get('/allergy-info', FRCtrl.getAllergyInfo);
-    app.get('/meds-info', FRCtrl.getMedsInfo);
-    app.get('/surgery-info', FRCtrl.getSurgeryInfo);
-    app.get('/patient-history-info', FRCtrl.getPatientHistory);
-    app.get('/fam-history-info', FRCtrl.getFamHistory);
+    app.get('/api/patient-info:patient_id', FRCtrl.getPatientInfo);
+    app.get('/api/pcare-info:patient_id', FRCtrl.getPCareInfo);
+    app.get('/api/allergy-info:patient_id', FRCtrl.getAllergyInfo);
+    app.get('/api/meds-info:patient_id', FRCtrl.getMedsInfo);
+    app.get('/api/surgery-info:patient_id', FRCtrl.getSurgeryInfo);
+    app.get('/api/patient-history-info:patient_id', FRCtrl.getPatientHistory);
+    app.get('/api/fam-history-info:patient_id', FRCtrl.getFamHistory);
+
+    //Medical History endpoints
+    app.get('/api/personal-history:id', MedHistoryCtrl.getPersonalHistory);
+    app.get('api/family-history:id', MedHistoryCtrl.getFamHistory);
 
     //auth
     app.post('/auth/register', ac.register)
