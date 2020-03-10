@@ -76,7 +76,8 @@ create table appointments (
     date varchar(150),
     time time,
     appt_desc varchar(600),
-    appt_address varchar(300)
+    appt_address varchar(300),
+    patient_id int references patients(patient_id)
 );
 
 create table calendar (
