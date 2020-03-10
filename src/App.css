@@ -22,11 +22,13 @@ nav{
   width: 100vw;
   height: 75px;
   display: flex;
+  z-index: 750;
   justify-content: space-between;
   align-items: center;
   padding: 0 150px;
-  background: #669677;
-  color: #FFE5D8
+  background: #385F71;
+  color: #FFE5D8;
+  box-shadow: 0 0 4px 8px grey;
 }
 
 nav div{
@@ -34,6 +36,10 @@ nav div{
   justify-content: space-between;
   align-items: center;
   width: 250px;
+}
+
+nav div p{
+  color: #FFE5D8
 }
 
 nav i {
@@ -64,7 +70,7 @@ nav i {
   flex-direction: column;
   padding: 8px 16px;
   top: 75px;
-  background: lightyellow;
+  background: #699677;
   animation: drop-down .25s;
   overflow: hidden;
 }
@@ -242,8 +248,26 @@ container{
   justify-content: flex-end;
 }
 
-.tr:nth-of-type(2n+1){
+/* .day:nth-of-type(2n+1){
   background: #FFE5D8;
+} */
+
+.tr:nth-of-type(2n+1){
+  background: #C3DEB7;
+}
+
+/* .day:nth-of-type(2n+0) span{
+  color: #FFE5D8;
+} */
+
+.prev{
+  color: #FFE5D8;
+  cursor: pointer;
+  transition: all .25s ease;
+}
+
+.prev:hover{
+  transform: scale(1.25);
 }
 
 .tr-head{
@@ -278,29 +302,47 @@ container{
   border: 2px solid black;
   top: 0;
   left: 0;
-  padding: 0 4px;
+  padding: 0 8px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
 }
 
 .nav-month i{
   cursor: pointer
 }
 
-.dropdown{
+.label-month{
+  margin-right: 12px;
+}
+
+.month-dropdown{
   height: auto;
-  width: 100%;
+  width: calc(100% - 8px);
   position: absolute;
-  top: 0;
+  top: 24px;
+  left: 0;
+  background: white;
+  padding: 4px 8px;
+  animation: drop-down .5s;
+  overflow: hidden;
 }
 
 k{
   cursor: pointer;
 }
 
+.editor-year{
+  width: 75px;
+}
+
 .calendar-header{
   height: 50px;
   width: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -311,15 +353,15 @@ k{
 
 .calendar{
   height: calc(100% - 0px);
-  background: #385F71;
+  background: #669677;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
 }
 
 .current-day{
-  border: 2px solid #699677;
-  color: #699677;
+  border: 2px solid #385F71;
+  color: #385F71;
 }
 
 .legend{
@@ -405,6 +447,22 @@ k{
   z-index: 3;
   width: 50%;
   height: 50%;
+  background: white;
+  border: 2px solid #669677
+}
+
+/* First Responder view Styling */
+#fr-view-main{
+  flex-direction: column;
+}
+
+.fr-container{
+  width: 60%;
+  height: 90%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
   background: white;
 }
 

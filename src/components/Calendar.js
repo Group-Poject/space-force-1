@@ -92,7 +92,7 @@ export default class Calendar extends React.Component {
         });
 
         return (
-            <div className="dropdown">
+            <div className="month-dropdown">
                 {popup}
             </div>
         );
