@@ -73,6 +73,7 @@ nav i {
   background: #699677;
   animation: drop-down .25s;
   overflow: hidden;
+  box-shadow: 0px 57px 88px -15px rgba(88, 88, 88, 0.66);
 }
 
 /* General container styling */
@@ -99,7 +100,7 @@ main{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background: white;
+  background: #699677;
   overflow: hidden;
   box-shadow: 0 0 32px 16px rgba(128, 128, 128, 0.5);
 }
@@ -617,18 +618,21 @@ footer div{
 button{
   width: auto;
   height: 24px;
-  padding: 4px;
-  border: 2px solid black;
-  background: white;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 4px;
+  background: #699677;
   cursor: pointer;
   transition: all .125s;
   outline: none;
   line-height: 11px;
+  box-shadow:  4px 4px 12px #5C8368, 
+               -4px -4px 12px #8FB099;
 }
 
-button:hover{
+/* button:hover{
   transform: translate3d(-1px, -1px, 0);
-}
+} */
 button:active{
   transform: translate3d(1px, 1px, 0) scale(.95);
 }
