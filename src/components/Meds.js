@@ -15,7 +15,7 @@ const Meds = props => {
     },[])
     const [toggle, setToggle]=useState(false);
         return(
-            <main id='column'>
+            <main id='meds-main'>
                 <form
                 onSubmit={e=>{
                     {axios.post('/api/addMedicine', {medication_name, prescription_date, dose}).then(results=>{
@@ -25,7 +25,7 @@ const Meds = props => {
                         .catch(err=>console.log(err))}}
                 }>
                 <div className='add-medication-container'>
-                    Medications
+                    <h3>Medications</h3>
                     <div>
                         <input 
                         name='medication_name'
@@ -35,41 +35,40 @@ const Meds = props => {
                         />
                         <input 
                         name='prescription_date'
+                        type='date'
                         placeholder='Prescription Date'
                         value={prescription_date}
                         onChange={setValues}
                         />
-                    </div>
-                    <div>
                         <input 
                         name='dose'
                         placeholder='Dose'
                         value={dose}
                         onChange={setValues}
                         />
-                    </div>
-                    <div>
                         <button type='submit'>Add New</button>
                     </div>
                 </div>
-                <div className='medication-container'>
-
-                </div>
                 </form>
+                <div className='medication-container'>
+                    <div className='meds-header'>
+                        <p>Medication</p>
+                        <p>Prescription Date</p>
+                        <p>Dose</p>
+                    </div>
                 {medicine_list.map((medicine, index)=>(
-                        <div key={index}>
-                            <div>
-                            {medicine.medication_name}
-                            {medicine.prescription_date}
-                            {medicine.dose}
-                            {toggle ? <button onClick={()=> {
+                        <div key={index} className='med-history'>
+                            <p className='med-action'>{medicine.medication_name}<p>{toggle ? <button onClick={()=> {
                                 setToggle(!toggle)
                                 // editMedicine(medicine)
                                 }}>Save</button>:<button onClick={()=>setToggle(!toggle)}>Edit</button>} 
-                            <button>Delete</button>
-                            </div>
+                            <button>Delete</button></p></p>
+                            <p>{medicine.prescription_date}</p>
+                            <p>{medicine.dose}</p>
+                            
                         </div>
                     ))}
+                    </div>
             </main>
         )
     }
