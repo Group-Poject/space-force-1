@@ -138,16 +138,24 @@ class FRview extends Component {
         })
 
         return(
-            <main>
-
-                <div>{mappedPatientInfo}</div>
-                <div>{mappedPCare}</div>
-                <div>{mappedAllergies}</div>
-                <div>{mappedMeds}</div>
-                <div>{mappedSurgeries}</div>
-                <div>{mappedPatientHistory}</div>
-                <div>{mappedFamHistory}</div>
-
+            <main id='fr-view-main'>
+                <div className='fr-container'>
+                    FRView
+                    {/* <div>{mappedPatientInfo}</div>
+                    <div>{mappedPCare}</div>
+                    <div>{mappedAllergies}</div>
+                    <div>{mappedMeds}</div>
+                    <div>{mappedSurgeries}</div>
+                    <div>{mappedPatientHistory}</div>
+                    <div>{mappedFamHistory}</div> */}
+                    <div>mappedPatientInfo</div>
+                    <div>mappedPCare</div>
+                    <div>mappedAllergies</div>
+                    <div>mappedMeds</div>
+                    <div>mappedSurgeries</div>
+                    <div>mappedPatientHistory</div>
+                    <div>mappedFamHistory</div>
+                </div>
             </main>
         )
     }
