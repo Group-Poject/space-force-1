@@ -14,7 +14,7 @@ const Meds = props => {
     useEffect(()=>{
         console.log('hit')
         axios.get(`/api/medicines${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
-    })
+    }, [])
     const [toggle, setToggle]=useState(false);
         return(
             <main id='meds-main'>

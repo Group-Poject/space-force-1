@@ -5,6 +5,7 @@ import {getUser} from '../redux/userReducer';
 import {useInputValue} from '../hooks/useInputValue';
 
 const Auth = props => {
+  console.log(props)
   const [loginClass, setLoginClass] = useState('login-container')
   const [registerClass, setRegisterClass] = useState('register-container')
 
@@ -23,34 +24,58 @@ const Auth = props => {
     return(
         <main>
           <div className='auth-container'>
+            <form
+            onSubmit={e=>{
+              e.preventDefault()
+              console.log('hit')
+              axios.post(`/auth/login`, {email, password}).then(results=>{
+                console.log(results)
+                  props.getUser(results.data)
+                  resetValues()              
+          })
+                  .catch(err=>console.log(err))}
+          }>
             <div className={loginClass}>
               <h3>Login</h3>
               <div className='login-row'>
                 <p>Email: </p>
-                <input type='text'/>
+                <input 
+                type='text'
+                name='email' 
+                placeholder='Email Address'
+                value={email}
+                onChange={setValues}
+                />
               </div>
               <div className='login-row'>
                 <p>Password: </p>
-                <input type='password'/>
+                <input 
+                type='password'
+                name='password' 
+                placeholder='Password' 
+                value={password}
+                onChange={setValues}
+                />
               </div>
               <div className='login-row'>
                 <button onClick={() => {
                   setLoginClass('login-container left')
                   setRegisterClass('register-container left')
                 }}>Register</button>
-                <button>Login</button>
+                <button type='submit'>Login</button>
               </div>
             </div>
-            <div className={registerClass}>
+            </form>
 
             {/* Register */}
 
+            <div className={registerClass}>
               <h3>Register</h3>
               <form
               onSubmit={e=>{
                 e.preventDefault()
                 axios.post(`/auth/register`, {first_name, last_name, email, password, phone_number, address, birth_date, religious_preference, blood_type}).then(results=>{
-                    {props.getUser(results.data)}
+                    props.getUser(results.data)
                     resetValues()              
             })
                     .catch(err=>console.log(err))}
@@ -159,4 +184,7 @@ const Auth = props => {
         </main>
     );
 }
-export default connect(null, {getUser})(Auth);
+const mapStateToProps = state => {
+  return state
+}
+export default connect(mapStateToProps, {getUser})(Auth);
