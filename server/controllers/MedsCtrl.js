@@ -9,18 +9,18 @@ module.exports={
 
     addMedicine: (req, res)=>{
         const {id} = req.params;
-        const {medication_name, prescription_date, dose, frequency} = req.body;
+        const {medication_name, prescription_date, dose} = req.body;
         const db = req.app.get('db');
-        db.meds.add_med(id, medication_name, prescription_date, dose, frequency)
+        db.meds.add_med(id, medication_name, prescription_date, dose)
         .then(data => res.status(200).send(data))
         .catch(err => res.status(500).send(err));
     },
 
     editMedicine: (req, res)=>{
         const {id} = req.params;
-        const {medication_name, prescription_date, dose, frequency} = req.body;
+        const {medication_name, prescription_date, dose} = req.body;
         const db = req.app.get('db');
-        db.meds.edit_meds(id, medication_name, prescription_date, dose, frequency)
+        db.meds.edit_meds(id, medication_name, prescription_date, dose)
         .then(data => res.status(200).send(data))
         .catch(err => res.status(500).send(err));
     },
