@@ -9,7 +9,7 @@ const Allergies = props => {
         allergy_name: '',
         allergy_desc: '',
         diagnose_date: ''
-    })
+    },[])
     const [allergy_list, setList]=useState([])
     useEffect(()=>{
         console.log('hit')
@@ -30,7 +30,7 @@ const Allergies = props => {
                 <div>
                     <form 
                     onSubmit={e=>{
-                        // e.preventDefault()
+                        e.preventDefault()
                         axios.post(`/api/addAllergy${props.user.patient_id}`, {allergy_name, allergy_desc, diagnose_date}).then(results=>{
                             setList(results.data)
                             resetValues()              

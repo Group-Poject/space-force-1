@@ -1,9 +1,9 @@
 module.exports={
-    getMedicines:(req, res)=>{
+    getMedicines:async(req, res)=>{
         const {id} = req.params;
         const db = req.app.get('db');
-        db.meds.get_meds(id)
-        .then(data => res.status(200).send(data))
+        const meds = await db.meds.get_meds(id)
+        .then(meds => res.status(200).send(meds))
         .catch(err => res.status(500).send(err));
     },
 
