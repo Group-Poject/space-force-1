@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { useInputValue } from '../hooks/useInputValue';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {getUser} from '../redux/userReducer';
 
 const Surgeries = props => {
     const [{surgery_name, surgery_desc, surgery_date}, setValues, resetValues]=useInputValue({
@@ -11,8 +13,8 @@ const Surgeries = props => {
     const [surgery_list, setList]=useState([])
     useEffect(()=>{
         console.log('hit')
-        axios.get('/api/surgeries').then(results=>setList(results.data)).catch(err=>console.log(err))
-    },[])
+        axios.get(`/api/surgeries${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
+    })
     const [toggle, setToggle]=useState(false);
         return(
             <main>
@@ -20,11 +22,11 @@ const Surgeries = props => {
                 <div>
                     <form
                     onSubmit={e=>{
-                        {axios.post('/api/addSurgery', {surgery_name, surgery_desc, surgery_date}).then(results=>{
+                        axios.post(`/api/addSurgery${props.user.patient_id}`, {surgery_name, surgery_desc, surgery_date}).then(results=>{
                             setList(results.data)
                             resetValues()
                     })
-                            .catch(err=>console.log(err))}}
+                            .catch(err=>console.log(err))}
                     }
                     >
                     <input 
@@ -66,4 +68,8 @@ const Surgeries = props => {
         )
     }
 
-    export default Surgeries; 
+    const mapStateToProps = state => {
+        return state
+    }
+    
+    export default connect(mapStateToProps, {getUser})(Surgeries);
