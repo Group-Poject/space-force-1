@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { useInputValue } from '../hooks/useInputValue';
 import axios from 'axios';
+import {connect} from 'react-redux';
+import {getUser} from '../redux/userReducer';
 
 const Meds = props => {
     const [{medication_name, prescription_date, dose}, setValues, resetValues]=useInputValue({
@@ -11,18 +13,18 @@ const Meds = props => {
     const [medicine_list, setList]=useState([])
     useEffect(()=>{
         console.log('hit')
-        axios.get('/api/medicines').then(results=>setList(results.data)).catch(err=>console.log(err))
-    },[])
+        axios.get(`/api/medicines${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
+    })
     const [toggle, setToggle]=useState(false);
         return(
             <main id='meds-main'>
                 <form
                 onSubmit={e=>{
-                    {axios.post('/api/addMedicine', {medication_name, prescription_date, dose}).then(results=>{
+                    axios.post(`/api/addMedicine${props.user.patient_id}`, {medication_name, prescription_date, dose}).then(results=>{
                         setList(results.data)
                         resetValues()
                 })
-                        .catch(err=>console.log(err))}}
+                        .catch(err=>console.log(err))}
                 }>
                 <div className='add-medication-container'>
                     <h3>Medications</h3>
@@ -73,4 +75,8 @@ const Meds = props => {
         )
     }
 
-    export default Meds; 
+    const mapStateToProps = state => {
+        return state
+    }
+    
+    export default connect(mapStateToProps, {getUser})(Meds);

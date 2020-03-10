@@ -31,19 +31,19 @@ app.use(
     //endpoints
     //Allergy endpoints
     app.get('/api/allergies:id', AllergyCtrl.getAllergies)
-    app.post('/api/addAllergy', AllergyCtrl.addAllergy)
+    app.post('/api/addAllergy:id', AllergyCtrl.addAllergy)
     app.put('/api/editAllergy/:id', AllergyCtrl.editAllergy)
     app.delete('api/deleteAllergy/:id', AllergyCtrl.deleteAllergy)
 
     //Medicine endpoints
     app.get('/api/medicines:id', MedsCtrl.getMedicines)
-    app.post('/api/addMedicine', MedsCtrl.addMedicine)
+    app.post('/api/addMedicine:id', MedsCtrl.addMedicine)
     app.put('/api/editMedicine/:id', MedsCtrl.editMedicine)
     app.delete('/api/deleteMedicine/:id', MedsCtrl.deleteMedicine)
 
     //Surgery endpoints
-    app.get('/api/surgeries', SurgeryCtrl.getSurgeries)
-    app.post('/api/addSurgery', SurgeryCtrl.addSurgery)
+    app.get('/api/surgeries:id', SurgeryCtrl.getSurgeries)
+    app.post('/api/addSurgery:id', SurgeryCtrl.addSurgery)
     app.put('/api/editSurgery/:id', SurgeryCtrl.editSurgery)
     app.delete('/api/deleteSurgery/:id', SurgeryCtrl.deleteSurgery)
 

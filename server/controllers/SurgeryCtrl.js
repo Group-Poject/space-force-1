@@ -1,30 +1,35 @@
-let surgeries = []
-
 module.exports={
     getSurgeries:(req, res)=>{
+        const {id} = req.params;
         const db = req.app.get('db');
-        db.surgeries.get_surgeries()
-        
-        res.status(200).send(surgeries)},
+        db.surgeries.get_surgeries(id)
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(500).send(err));
+    },
 
     addSurgery: (req, res)=>{
+        const {id} = req.params;
+        const {surgery_name, surgery_desc, surgery_date} = req.body;
         const db = req.app.get('db');
-        db.surgeries.add_surgery()
-
-        surgeries.push(req.body)
-        res.status(200).send(surgeries)},
+        db.surgeries.add_surgery(id, surgery_name, surgery_desc, surgery_date)
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(500).send(err));
+    },
 
     editSurgery: (req, res)=>{
+        const {id} = req.params;
+        const {surgery_name, surgery_desc, surgery_date} = req.body;
         const db = req.app.get('db');
-        const {id} = req.params
-        db.surgeries.edit_surgery(id)
-        
-        res.status(200).send('edit surgery endpoint')},
+        db.surgeries.edit_surgery(id, surgery_name, surgery_desc, surgery_date)
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(500).send(err));
+    },
         
     deleteSurgery: (req, res)=>{
+        const {id} = req.params;
         const db = req.app.get('db');
-        const {id} = req.params
         db.surgeries.delete_surgery(id)
-        
-        res.status(200).send('delete surgery endpoint')}
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(500).send(err));
+    }
 }
