@@ -29,43 +29,43 @@ class FRview extends Component {
     }
 
     getPatientInfo = () => {
-        axios.get(`/patient-info${this.props.user.patient_id}`)
+        axios.get(`/api/patient-info${this.props.user.patient_id}`)
         .then(res => {this.setState({patientInfo: res.data})})
         .catch(err => console.log(err));
     }
     getPCareInfo = () => {
-        axios.get(`/pcare-info${this.props.user.patient_id}`)
+        axios.get(`/api/pcare-info${this.props.user.patient_id}`)
         .then(res => {this.setState({pCare: res.data})})
         .catch(err => console.log(err));
     }
     getAllergyInfo = () => {
-        axios.get(`/allergy-info${this.props.user.patient_id}`)
+        axios.get(`/api/allergy-info${this.props.user.patient_id}`)
         .then(res => {this.setState({allergies: res.data})})
         .catch(err => console.log(err));
     }
     getMedsInfo = () => {
-        axios.get(`/meds-info${this.props.user.patient_id}`)
+        axios.get(`/api/meds-info${this.props.user.patient_id}`)
         .then(res => {this.setState({meds: res.data})})
         .catch(err => console.log(err));
     }
     getSurgeryInfo = () => {
-        axios.get(`/surgery-info${this.props.user.patient_id}`)
+        axios.get(`/api/surgery-info${this.props.user.patient_id}`)
         .then(res => {this.setState({surgeries: res.data})})
         .catch(err => console.log(err));
     }
     getPatientHistory = () => {
-        axios.get(`/patient-history-info${this.props.user.patient_id}`)
+        axios.get(`/api/patient-history-info${this.props.user.patient_id}`)
         .then(res => {this.setState({patientHistory: res.data})})
         .catch(err => console.log(err));
     }
     getFamHistory = () => {
-        axios.get(`/fam-history-info${this.props.user.patient_id}`)
+        axios.get(`/api/fam-history-info${this.props.user.patient_id}`)
         .then(res => {this.setState({famHistory: res.data})})
         .catch(err => console.log(err));
     }
 
     render(){
-        const mappedPatientInfo = this.state.patientInfo.map((i, e) => {
+        const mappedPatientInfo = this.state.patientInfo.map((e, i) => {
             return(
                 <div key={i}>
                     <h1>{e.first_name}</h1>
@@ -78,7 +78,7 @@ class FRview extends Component {
                 </div>
             )
         });
-        const mappedPCare = this.state.pCare.map((i, e) => {
+        const mappedPCare = this.state.pCare.map((e, i) => {
             return(
                 <div key={i}>
                     <h1>{e.first_name}</h1>
@@ -89,7 +89,7 @@ class FRview extends Component {
                 </div>
             )
         });
-        const mappedAllergies = this.state.allergies.map((i, e) => {
+        const mappedAllergies = this.state.allergies.map((e, i) => {
             return(
                 <div key={i}>
                     <h1>{e.allergy_name}</h1>
@@ -98,7 +98,7 @@ class FRview extends Component {
                 </div>
             )
         });
-        const mappedMeds = this.state.meds.map((i, e) => {
+        const mappedMeds = this.state.meds.map((e, i) => {
             return(
                 <div key={i}>
                     <h1>{e.medication_name}</h1>
@@ -107,7 +107,7 @@ class FRview extends Component {
                 </div>
             )
         });
-        const mappedSurgeries = this.state.surgeries.map((i, e) => {
+        const mappedSurgeries = this.state.surgeries.map((e, i) => {
             return(
                 <div key={i}>
                     <h1>{e.surgery_name}</h1>
@@ -116,7 +116,7 @@ class FRview extends Component {
                 </div>
             )
         });
-        const mappedPatientHistory = this.state.patientHistory.map((i, e) => {
+        const mappedPatientHistory = this.state.patientHistory.map((e, i) => {
             return(
                 <div key={i}>
                     <p>Patient Medical History</p>
@@ -126,7 +126,7 @@ class FRview extends Component {
                 </div>
             )
         });
-        const mappedFamHistory = this.state.famHistory.map((i, e) => {
+        const mappedFamHistory = this.state.famHistory.map((e, i) => {
             return(
                 <div key={i}>
                     <p>Family Medical History</p>
