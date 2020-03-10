@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { useInputValue } from '../hooks/useInputValue';
 import axios from 'axios';
+import {connect} from ''
+
 
 const Allergies = props => {
     const [{allergy_name, allergy_desc, diagnose_date}, setValues, resetValues]=useInputValue({
@@ -13,6 +15,14 @@ const Allergies = props => {
         console.log('hit')
         axios.get('/api/allergies').then(results=>setList(results.data)).catch(err=>console.log(err))
     },[])
+    // const deleteAllergy =(id)=>{
+    //     console.log(id)
+    //     axios.delete (`/api/allergy/${id}`)
+    //     .then(results=> {
+    //       this.getAllergies()
+    //       this.setList({allergies: results.data})
+    //     }).catch(err=>console.log(err))
+    // }
     const [toggle, setToggle]=useState(false);
         return(
             <main>
@@ -21,12 +31,13 @@ const Allergies = props => {
                     <form 
                     onSubmit={e=>{
                         // e.preventDefault()
-                        {axios.post('/api/addAllergy', {allergy_name, allergy_desc, diagnose_date}).then(results=>{
+                        axios.post('/api/addAllergy', {allergy_name, allergy_desc, diagnose_date}).then(results=>{
                             setList(results.data)
                             resetValues()              
                     })
-                            .catch(err=>console.log(err))}}
+                            .catch(err=>console.log(err))}
                     }>
+
                     <input 
                     name='allergy_name'
                     placeholder='Allergy Name'
@@ -57,7 +68,9 @@ const Allergies = props => {
                                 setToggle(!toggle)
                                 // editAllergy(allergy)
                                 }}>Save</button>:<button onClick={()=>setToggle(!toggle)}>Edit</button>} 
-                                <button>Delete</button>    
+                                <button
+                                // onClick={() => deleteAllergy(allergy)}
+                                >Delete </button>    
                             </div>
                         </div>
                     ))}
