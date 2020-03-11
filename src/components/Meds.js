@@ -60,11 +60,11 @@ const Meds = props => {
                     </div>
                 {medicine_list.map((medicine, index)=>(
                         <div key={index} className='med-history'>
-                            <p className='med-action'>{medicine.medication_name}<p>{toggle ? <button onClick={()=> {
+                            <p className='med-action'>{medicine.medication_name}<p>{toggle ? <actionbutton onClick={()=> {
                                 setToggle(!toggle)
                                 // editMedicine(medicine)
-                                }}>Save</button>:<button onClick={()=>setToggle(!toggle)}>Edit</button>} 
-                            <button>Delete</button></p></p>
+                                }}>Save</actionbutton>:<actionbutton onClick={()=>setToggle(!toggle)}>Edit</actionbutton>} 
+                            <actionbutton>Delete</actionbutton></p></p>
                             <p>{medicine.prescription_date}</p>
                             <p>{medicine.dose}</p>
                             

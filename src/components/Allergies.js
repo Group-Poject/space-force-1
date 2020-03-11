@@ -25,10 +25,8 @@ const Allergies = props => {
     // }
     const [toggle, setToggle]=useState(false);
         return(
-            <main>
-                Allergies
-                <div>
-                    <form 
+            <main id='meds-main'>
+                <form 
                     onSubmit={e=>{
                         e.preventDefault()
                         axios.post(`/api/addAllergy${props.user.patient_id}`, {allergy_name, allergy_desc, diagnose_date}).then(results=>{
@@ -38,39 +36,50 @@ const Allergies = props => {
                             .catch(err=>console.log(err))}
                     }>
 
-                    <input 
-                    name='allergy_name'
-                    placeholder='Allergy Name'
-                    value={allergy_name}
-                    onChange={setValues}
-                    />
-                    <input 
-                    name='allergy_desc'
-                    placeholder='Allergy Description'
-                    value={allergy_desc}
-                    onChange={setValues}
-                    />
-                    <input 
-                    name='diagnose_date'
-                    placeholder='Diagnose Date'
-                    value={diagnose_date}
-                    onChange={setValues}
-                    />
-                    <button type='submit'>Add New</button>
+                    <div className='add-medication-container'>  
+                        <h3>Allergies</h3> 
+                        <div>
+                            <input 
+                            name='allergy_name'
+                            placeholder='Allergy Name'
+                            value={allergy_name}
+                            onChange={setValues}
+                            />
+                            <input 
+                            name='allergy_desc'
+                            placeholder='Allergy Description'
+                            value={allergy_desc}
+                            onChange={setValues}
+                            />
+                            <input 
+                            name='diagnose_date'
+                            placeholder='Diagnose Date'
+                            value={diagnose_date}
+                            onChange={setValues}
+                            />
+                            <button type='submit'>Add New</button>
+                        </div>
+                    </div>
                     </form>
+                    <div className='medication-container'>
+                        <div className='meds-header'>
+                            <p>Allergy</p>
+                            <p>Diagnose Date</p>
+                            <p>Description</p>
+                        </div>
                     {allergy_list.map((allergy, index)=>(
-                        <div key={index}>
+                        <div key={index} className='med-history'>
                             <div>
-                                {allergy.allergy_name}
-                                {allergy.allergy_desc}
-                                {allergy.diagnose_date}
-                                {toggle ? <button onClick={()=> {
+                                <p className='med-action'>{allergy.allergy_name}<p>{toggle ? <actionbutton onClick={()=> {
                                 setToggle(!toggle)
                                 // editAllergy(allergy)
-                                }}>Save</button>:<button onClick={()=>setToggle(!toggle)}>Edit</button>} 
-                                <button
+                                }}>Save</actionbutton>:<actionbutton onClick={()=>setToggle(!toggle)}>Edit</actionbutton>} 
+                                <actionbutton
                                 // onClick={() => deleteAllergy(allergy)}
-                                >Delete </button>    
+                                >Delete </actionbutton></p></p>
+                                <p>{allergy.allergy_desc}</p>
+                                <p>{allergy.diagnose_date}</p>
+                                    
                             </div>
                         </div>
                     ))}
