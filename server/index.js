@@ -8,7 +8,7 @@ const express = require('express'),
       SurgeryCtrl=require('./controllers/SurgeryCtrl'),
       FRCtrl = require('./controllers/FRCtrl'),
       MedHistoryCtrl = require('./controllers/MedHistoryCtrl'),
-      contactsCtrl = require('./controllers/contactsCtrl')
+      contactsCtrl = require('./controllers/contactsCtrl'),
       app = express(),
       path = require('path'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -61,6 +61,8 @@ app.use(
     //Medical History endpoints
     app.get('/api/personal-history:id', MedHistoryCtrl.getPersonalHistory);
     app.get('api/family-history:id', MedHistoryCtrl.getFamHistory);
+    app.post('/api/add-personal-history:id', MedHistoryCtrl.postPersonalHistory);
+    app.post('/api/add-fam-history:id', MedHistoryCtrl.postFamHistory);
 
     //auth
     app.post('/auth/register', ac.register)
