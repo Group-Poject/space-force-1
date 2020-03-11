@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import axios from 'axios';
 
 class Dashboard extends Component {
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             month: 0,
             year: 0,
@@ -18,6 +20,14 @@ class Dashboard extends Component {
 
     componentDidMount(){
         this.currentDate();
+        this.getEvents(this.props.userReducer.user.patient_id)
+
+    }
+
+    getEvents = (id) => {
+        axios.get(`/calendar/events${id}`).then(res => {
+            console.log(res.data)
+        })
     }
 
     currentDate = () => {
@@ -84,8 +94,14 @@ class Dashboard extends Component {
                             {day}
                         </div>
 
-                        <button>{'<'}</button>
-                        <button>{'>'}</button>
+                        <div>
+                            <i className="prev fa fa-fw fa-chevron-left"
+                                onClick={() => console.log('left')}>
+                            </i>
+                            <i className="prev fa fa-fw fa-chevron-right"
+                                onClick={() => console.log('right')}>
+                            </i>
+                        </div>
                     </div>
                     <container className='todays-meds'>
                         todays meds
@@ -131,4 +147,8 @@ class Dashboard extends Component {
     }
 }
 
-export default Dashboard; 
+const mapStateToProps = state => {
+    return state
+}
+
+export default connect(mapStateToProps, null)(Dashboard); 

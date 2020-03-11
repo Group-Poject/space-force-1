@@ -1,4 +1,7 @@
-import {createStore} from 'redux';
+import {createStore, combineReducers} from 'redux';
 import userReducer from './userReducer';
+import calendarReducer from './calendarReducer';
 
-export default createStore(userReducer);
+let rootReducer = combineReducers({userReducer, calendarReducer})
+
+export default createStore(rootReducer);
