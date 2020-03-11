@@ -13,8 +13,7 @@ const Allergies = props => {
     const [allergy_list, setList]=useState([])
     const getAllergies = () => axios.get(`/api/allergies${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
     useEffect((e)=>{
-        console.log('hit')
-        // e.preventDefault()
+        // console.log('hit')
         getAllergies();
     }, [])
     const deleteAllergy =(id)=>{
@@ -22,7 +21,6 @@ const Allergies = props => {
         axios.delete (`/api/allergy/${id}`)
         .then(results=> {
           getAllergies()
-        //   this.setList({allergy_list: results.data})
         }).catch(err=>console.log(err))
     }
     const [toggle, setToggle]=useState(false);
