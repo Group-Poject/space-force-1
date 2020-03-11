@@ -35,7 +35,7 @@ app.use(
     app.get('/api/allergies:id', AllergyCtrl.getAllergies)
     app.post('/api/allergy:id', AllergyCtrl.addAllergy)
     app.put('/api/allergy/:id', AllergyCtrl.editAllergy)
-    app.delete('api/allergy/:id', AllergyCtrl.deleteAllergy)
+    app.delete('/api/allergy/:id', AllergyCtrl.deleteAllergy)
 
     //Medicine endpoints
     app.get('/api/medicines:id', MedsCtrl.getMedicines)
