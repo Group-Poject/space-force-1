@@ -23,7 +23,7 @@ class Nav extends Component {
                     <Link to='/first-responder' ><i className="fas fa-ambulance"></i></Link>
                 </div>
                 <div>
-                    <p>{this.props.user.first_name ? `Hello, ${this.props.user.first_name}.` : 'Hello'}</p>
+                    <p>{this.props.userReducer.user.first_name ? `Hello, ${this.props.userReducer.user.first_name}.` : 'Hello'}</p>
                     <i className="fas fa-bars" onClick={() => this.setState({toggleDropdown: !this.state.toggleDropdown})}></i>
                     {this.state.toggleDropdown ? <div className='dropdown'>
                         <Link to='/dashboard' onClick={() => this.setState({toggleDropdown: false})}>Dashboard</Link>

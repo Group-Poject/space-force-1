@@ -636,11 +636,13 @@ button{
 }
 
 button:hover{
-  animation: rotate .1s infinite;
+  transform: scale(.98);
 }
 
 button:active{
   transform: translate3d(1px, 1px, 0) scale(.95);
+  box-shadow:  inset 4px 4px 12px #5C8368, 
+               inset -4px -4px 12px #8FB099;
 }
 
 actionbutton{
