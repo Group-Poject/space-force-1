@@ -20,7 +20,7 @@ const Surgeries = props => {
             <main id='meds-main'>
                 <form
                 onSubmit={e=>{
-                    axios.post(`/api/addSurgery${props.user.patient_id}`, {surgery_name, surgery_desc, surgery_date}).then(results=>{
+                    axios.post(`/api/surgery${props.user.patient_id}`, {surgery_name, surgery_desc, surgery_date}).then(results=>{
                         setList(results.data)
                         resetValues()
                 })
@@ -31,24 +31,24 @@ const Surgeries = props => {
                         <h3>Surgeries</h3>
                         <div>
                             <input 
-                            name='surgery_name'
-                            placeholder='Surgery Name'
-                            value={surgery_name}
-                            onChange={setValues}
+                            name = 'surgery_name'
+                            placeholder = 'Surgery Name'
+                            value = {surgery_name}
+                            onChange = {setValues}
                             />
                             <input 
                             name='surgery_desc'
-                            placeholder='Surgery Description'
-                            value={surgery_desc}
-                            onChange={setValues}
+                            placeholder = 'Surgery Description'
+                            value = {surgery_desc}
+                            onChange = {setValues}
                             />
                             <input 
-                            name='surgery_date'
-                            placeholder='Surgery Date'
-                            value={surgery_date}
-                            onChange={setValues}
+                            name = 'surgery_date'
+                            placeholder = 'Surgery Date'
+                            value = {surgery_date}
+                            onChange = {setValues}
                             />
-                            <button type='submit'>Add New</button>
+                            <button type = 'submit'>Add New</button>
                         </div>
                     </div>
                     </form>
