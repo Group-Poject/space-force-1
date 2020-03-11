@@ -25,16 +25,29 @@ module.exports = {
               {session} = req;
 
         let user = await db.auth.check_user(email);
-        if(!user[0]){
+        let contact = await db.auth.check_contacts(email);
+        let authorized;
+        if(!user[0] && !contact[0]){
             return res.status(400).send('User not found')
         }
-        const authorized = bcrypt.compareSync(password, user[0].password);
-        if(!authorized){
-            return res.status(401).send('Incorrect Password')
+        if(!user[0] && contact[0]){
+            authorized = bcrypt.compareSync(password, contact[0].password);
+            if(!authorized){
+                return res.status(401).send('Incorrect Password')
+            }
+            delete contact[0].password;
+            session.user = contact[0];
+            res.status(202).send(session.user);
         }
-        delete user[0].password;
-        session.user = user[0];
-        res.status(202).send(session.user);
+        if(user[0] && !contact[0]){
+            authorized = bcrypt.compareSync(password, user[0].password);
+            if(!authorized){
+                return res.status(401).send('Incorrect Password')
+            }
+            delete user[0].password;
+            session.user = user[0];
+            res.status(202).send(session.user);
+        }
     },
     logout: (req, res) => {
         req.session.destroy();

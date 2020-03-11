@@ -11,9 +11,10 @@ const Allergies = props => {
         diagnose_date: ''
     },[])
     const [allergy_list, setList]=useState([])
+    const getAllergies = () => axios.get(`/api/allergies${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
     useEffect(()=>{
         console.log('hit')
-        axios.get(`/api/allergies${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
+        getAllergies();
     }, [])
     // const deleteAllergy =(id)=>{
     //     console.log(id)
@@ -31,7 +32,8 @@ const Allergies = props => {
                         e.preventDefault()
                         axios.post(`/api/allergy${props.user.patient_id}`, {allergy_name, allergy_desc, diagnose_date}).then(results=>{
                             setList(results.data)
-                            resetValues()              
+                            resetValues();
+                            getAllergies();             
                     })
                             .catch(err=>console.log(err))}
                     }>

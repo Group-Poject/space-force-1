@@ -3,4 +3,5 @@ insert into medications (patient_id, medication_name, prescription_date, dose) v
     $2,
     $3,
     $4
-);
+) 
+returning *;

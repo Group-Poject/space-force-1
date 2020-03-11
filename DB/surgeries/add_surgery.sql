@@ -3,4 +3,5 @@ insert into surgeries (patient_id, surgery_name, surgery_desc, surgery_date) val
     $2,
     $3,
     $4
-);
+)
+returning *;
