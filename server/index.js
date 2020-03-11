@@ -8,6 +8,7 @@ const express = require('express'),
       SurgeryCtrl=require('./controllers/SurgeryCtrl'),
       FRCtrl = require('./controllers/FRCtrl'),
       MedHistoryCtrl = require('./controllers/MedHistoryCtrl'),
+      contactsCtrl = require('./controllers/contactsCtrl')
       app = express(),
       path = require('path'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -66,6 +67,12 @@ app.use(
     app.post('/auth/login', ac.login)
     app.post('/auth/logout', ac.logout)
     // app.get('/auth/user', ac.getUser)
+
+    //contacts
+    app.get('/api/contacts:id',  contactsCtrl.getContacts)
+    app.post('/api/contacts:id', contactsCtrl.addContact)
+    app.put('/api/contacts:id', contactsCtrl.editContact)
+    app.delete('/api/contacts:id', contactsCtrl.deleteContact)
     
     // app.use(express.static(__dirname + '/../build'))
     // app.get('*', (req,res)=> {
