@@ -84,8 +84,8 @@ class Dashboard extends Component {
                             {day}
                         </div>
 
-                        <div>back arrow</div>
-                        <div>forward arrow</div>
+                        <button>{'<'}</button>
+                        <button>{'>'}</button>
                     </div>
                     <container className='todays-meds'>
                         todays meds

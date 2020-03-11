@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
 
 
 class Nav extends Component {
@@ -12,6 +13,7 @@ class Nav extends Component {
         }
     }
     render(){
+        console.log(this.props);
         
         // this.state.body.onclick = this.setState({toggleDropdown: false})
         return(
@@ -21,7 +23,7 @@ class Nav extends Component {
                     <Link to='/first-responder' ><i className="fas fa-ambulance"></i></Link>
                 </div>
                 <div>
-                    <p>Hello, first_name.</p>
+                    <p>{this.props.user.first_name ? `Hello, ${this.props.user.first_name}.` : 'Hello'}</p>
                     <i className="fas fa-bars" onClick={() => this.setState({toggleDropdown: !this.state.toggleDropdown})}></i>
                     {this.state.toggleDropdown ? <div className='dropdown'>
                         <Link to='/dashboard' onClick={() => this.setState({toggleDropdown: false})}>Dashboard</Link>
@@ -40,4 +42,8 @@ class Nav extends Component {
     }
 }
 
-export default Nav;
+const mapStateToProps = state => {
+    return state
+}
+
+export default connect(mapStateToProps, null)(Nav);
