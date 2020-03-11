@@ -14,7 +14,7 @@ const Allergies = props => {
     useEffect(()=>{
         console.log('hit')
         axios.get(`/api/allergies${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
-    })
+    }, [])
     // const deleteAllergy =(id)=>{
     //     console.log(id)
     //     axios.delete (`/api/allergy/${id}`)
@@ -69,18 +69,16 @@ const Allergies = props => {
                         </div>
                     {allergy_list.map((allergy, index)=>(
                         <div key={index} className='med-history'>
-                            <div>
-                                <p className='med-action'>{allergy.allergy_name}<p>{toggle ? <actionbutton onClick={()=> {
-                                setToggle(!toggle)
-                                // editAllergy(allergy)
-                                }}>Save</actionbutton>:<actionbutton onClick={()=>setToggle(!toggle)}>Edit</actionbutton>} 
-                                <actionbutton
-                                // onClick={() => deleteAllergy(allergy)}
-                                >Delete </actionbutton></p></p>
-                                <p>{allergy.allergy_desc}</p>
-                                <p>{allergy.diagnose_date}</p>
+                            <p className='med-action'>{allergy.allergy_name}<p>{toggle ? <actionbutton onClick={()=> {
+                            setToggle(!toggle)
+                            // editAllergy(allergy)
+                            }}>Save</actionbutton>:<actionbutton onClick={()=>setToggle(!toggle)}>Edit</actionbutton>} 
+                            <actionbutton
+                            // onClick={() => deleteAllergy(allergy)}
+                            >Delete </actionbutton></p></p>
+                            <p>{allergy.diagnose_date}</p>
+                            <p>{allergy.allergy_desc}</p>
                                     
-                            </div>
                         </div>
                     ))}
                 </div>
