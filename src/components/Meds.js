@@ -20,7 +20,7 @@ const Meds = props => {
             <main id='meds-main'>
                 <form
                 onSubmit={e=>{
-                    axios.post(`/api/addMedicine${props.user.patient_id}`, {medication_name, prescription_date, dose}).then(results=>{
+                    axios.post(`/api/medicine${props.user.patient_id}`, {medication_name, prescription_date, dose}).then(results=>{
                         setList(results.data)
                         resetValues()
                 })
