@@ -19,12 +19,12 @@ const MedHistory = props => {
     useEffect(()=>{
         console.log('hit')
         axios.get(`/api/personal-history${props.user.patient_id}`).then(results=>setPersonalList(results.data)).catch(err=>console.log(err))
-    })
+    }, [])
     const [family_history_list, setFamilyList]=useState([])
     useEffect(()=>{
         console.log('hit')
         axios.get(`/api/family-history${props.user.patient_id}`).then(results=>setFamilyList(results.data)).catch(err=>console.log(err))
-    })
+    }, [])
     const [toggle, setToggle]=useState(false);
     
         return(
