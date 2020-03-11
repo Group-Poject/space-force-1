@@ -9,20 +9,30 @@ const Surgeries = props => {
         surgery_name: '',
         surgery_desc: '',
         surgery_date: ''
-    })
-    const [surgery_list, setList]=useState([])
-    useEffect(()=>{
-        console.log('hit')
-        axios.get(`/api/surgeries${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
     },[])
+    const [surgery_list, setList]=useState([])
+    const getSurgeries = () => axios.get(`/api/surgeries${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
+    useEffect((e)=>{
+        // console.log('hit')
+        getSurgeries();
+    }, [])
+    const deleteSurgery =(id)=>{
+        console.log(id)
+        axios.delete (`/api/surgery/${id}`)
+        .then(results=> {
+          getSurgeries()
+        }).catch(err=>console.log(err))
+    }
     const [toggle, setToggle]=useState(false);
         return(
             <main id='meds-main'>
                 <form
                 onSubmit={e=>{
+                    e.preventDefault()
                     axios.post(`/api/surgery${props.user.patient_id}`, {surgery_name, surgery_desc, surgery_date}).then(results=>{
                         setList(results.data)
                         resetValues()
+                        getSurgeries()
                 })
                         .catch(err=>console.log(err))}
                 }
@@ -64,7 +74,11 @@ const Surgeries = props => {
                                 setToggle(!toggle)
                                 // editSurgery(surgery)
                                 }}>Save</actionbutton>:<actionbutton onClick={()=>setToggle(!toggle)}>Edit</actionbutton>} 
-                            <actionbutton>Delete</actionbutton></p></p>
+                            <actionbutton
+                            onClick={() => {
+                                console.log(surgery)
+                                deleteSurgery(surgery.surgery_id)
+                            }}>Delete</actionbutton></p></p>
                             <p>{surgery.surgery_desc}</p>
                             <p>{surgery.surgery_date}</p>
                         </div>

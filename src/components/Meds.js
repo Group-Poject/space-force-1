@@ -11,18 +11,28 @@ const Meds = props => {
         dose: ''
     })
     const [medicine_list, setList]=useState([])
-    useEffect(()=>{
-        console.log('hit')
-        axios.get(`/api/medicines${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
+    const getMedicines = () => axios.get(`/api/medicines${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
+    useEffect((e)=>{
+        // console.log('hit')
+        getMedicines();
     }, [])
+    const deleteMedicine =(id)=>{
+        console.log(id)
+        axios.delete (`/api/medicine/${id}`)
+        .then(results=> {
+          getMedicines()
+        }).catch(err=>console.log(err))
+    }
     const [toggle, setToggle]=useState(false);
         return(
             <main id='meds-main'>
                 <form
                 onSubmit={e=>{
+                    e.preventDefault()
                     axios.post(`/api/medicine${props.user.patient_id}`, {medication_name, prescription_date, dose}).then(results=>{
                         setList(results.data)
                         resetValues()
+                        getMedicines()
                 })
                         .catch(err=>console.log(err))}
                 }>
@@ -64,7 +74,11 @@ const Meds = props => {
                                 setToggle(!toggle)
                                 // editMedicine(medicine)
                                 }}>Save</actionbutton>:<actionbutton onClick={()=>setToggle(!toggle)}>Edit</actionbutton>} 
-                            <actionbutton>Delete</actionbutton></p></p>
+                            <actionbutton
+                            onClick={() => {
+                                console.log(medicine)
+                                deleteMedicine(medicine.medication_id)
+                            }}>Delete</actionbutton></p></p>
                             <p>{medicine.prescription_date}</p>
                             <p>{medicine.dose}</p>
                             
