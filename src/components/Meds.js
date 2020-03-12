@@ -11,7 +11,7 @@ const Meds = props => {
         dose: ''
     })
     const [medicine_list, setList]=useState([])
-    const getMedicines = () => axios.get(`/api/medicines${props.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
+    const getMedicines = () => axios.get(`/api/medicines${props.userReducer.user.patient_id}`).then(results=>setList(results.data)).catch(err=>console.log(err))
     useEffect((e)=>{
         // console.log('hit')
         getMedicines();
@@ -29,7 +29,7 @@ const Meds = props => {
                 <form
                 onSubmit={e=>{
                     e.preventDefault()
-                    axios.post(`/api/medicine${props.user.patient_id}`, {medication_name, prescription_date, dose}).then(results=>{
+                    axios.post(`/api/medicine${props.userReducer.user.patient_id}`, {medication_name, prescription_date, dose}).then(results=>{
                         setList(results.data)
                         resetValues()
                         getMedicines()
