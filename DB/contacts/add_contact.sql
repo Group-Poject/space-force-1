@@ -3,11 +3,14 @@ insert into contacts (
     password,
     patient_id,
     phone_number,
-    has_access
+    has_access,
+    relationship
 ) values (
     $1,
     $2,
     $3,
     $4,
-    $5
-);
+    $5,
+    $6
+)
+returning *;
