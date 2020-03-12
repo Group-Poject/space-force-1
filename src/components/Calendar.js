@@ -9,8 +9,37 @@ export default class Calendar extends React.Component {
         showYearPopup: false,
         selectedDay: null,
         monthsArray: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-        zoomToggle: 'week-day zoom'
-
+        zoomToggle: 'week-day zoom',
+        sampleData: [
+            {
+                date: "2020-03-09",
+                medication: ['ibuprofen', 'anotha one'],
+                appointment: [{
+                    description: 'physical',
+                    time: '3:00pm'
+                }]
+            },
+            {
+                date: "2020-03-12",
+                medication: ['ibuprofen'],
+                appointment: [{
+                    description: 'physical',
+                    time: '3:00pm'
+                }]
+            },
+            {
+                date: "2020-03-25",
+                medication: ['ibuprofen']
+            },
+            {
+                date: "2020-03-26",
+                appointment: [{
+                    description: 'an appointment'
+                },{
+                    description: 'anatha appointment'
+                }]
+            }
+        ]
     }
 
     constructor(props) {
@@ -42,6 +71,8 @@ export default class Calendar extends React.Component {
         return this.state.dateContext.format("D");
     }
 
+    
+    
     firstDayOfMonth = () => {
         let dateContext = this.state.dateContext;
         let firstDay = moment(dateContext).startOf('month').format('d');
@@ -176,8 +207,6 @@ export default class Calendar extends React.Component {
 
 
     render() {
-        console.log(this.month())
-        console.log(this.state.monthsArray[this.state.dateContext.month()])
         let weekdays = this.weekdaysShort.map((day, i) => {
             return (
                 <div key={day} className="weekday-header" >{day}</div>
@@ -192,21 +221,48 @@ export default class Calendar extends React.Component {
             );
         }
 
-        console.log("blanks: ", blanks);
-
         let daysInMonth = [];
         let newDate = new Date();
         for (let d = 1; d <= this.daysInMonth(); d++) {
+            console.log(`${this.state.dateContext.month() + 1}/${d}/${this.state.dateContext.year()}`)
             let className = (d == this.currentDay() && newDate.getMonth() === this.state.dateContext.month() && +this.year() === +newDate.getFullYear() ? "day current-day": "day");
             let selectedClass = (d == this.state.selectedDay ? " week-day zoom " : " week-day")
+
+            let filtered = ['unchanged']
+
+            for(let i = 0; i < this.state.sampleData.length; i++){
+                let dateArr = this.state.sampleData[i].date.split('-')
+                if(+dateArr[2] === +d && +dateArr[1] === (+this.state.dateContext.month() + 1) && +dateArr[0] === +this.state.dateContext.year()){
+                    filtered.push(this.state.sampleData[i])
+                }
+            }
+            
+            let events = filtered.map((e, i) => {
+                let dots = []
+                let meds = () => e.medication ? e.medication.forEach((e, i) => {
+                    dots.push(<p key={i} id='med-dot'></p>)
+                }) : null
+                meds();
+                let apps = () => e.appointment ? e.appointment.forEach((e, i) => {
+                    dots.push(<p key={i} id='app-dot'></p>)
+                }) : null
+                apps()
+                    return(
+                        <div className='event-dot-container'>
+                            {dots}
+                        </div>
+                    )
+                })
             daysInMonth.push(
                 <div key={d} className={className + selectedClass} >
                     <span onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
                     {this.state.selectedDay ? 
                     <p onClick={() => this.setState({selectedDay: null})}>X</p> : null }
+                    {events[1]}
                 </div>
             );
         }
+        
         console.log("days: ", daysInMonth);
 
         var totalSlots = [...blanks, ...daysInMonth];
