@@ -17,7 +17,10 @@ create table contacts (
     password varchar(500),
     patient_id int references patients(patient_id),
     phone_number int,
-    has_access boolean
+    has_access boolean,
+    relationship varchar(150),
+    first_name varchar(150),
+    last_name varchar(150)
 );
 
 create table primary_care_physician (

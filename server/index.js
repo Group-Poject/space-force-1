@@ -9,6 +9,7 @@ const express = require('express'),
       FRCtrl = require('./controllers/FRCtrl'),
       MedHistoryCtrl = require('./controllers/MedHistoryCtrl'),
       contactsCtrl = require('./controllers/contactsCtrl'),
+      ProfileCtrl = require('./controllers/ProfileCtrl'),
       app = express(),
       path = require('path'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -63,6 +64,10 @@ app.use(
     app.get('api/family-history:id', MedHistoryCtrl.getFamHistory);
     app.post('/api/add-personal-history:id', MedHistoryCtrl.postPersonalHistory);
     app.post('/api/add-fam-history:id', MedHistoryCtrl.postFamHistory);
+
+    //Profile endpoints
+    app.get('/api/profile:id', ProfileCtrl.getProfile);
+    app.get('/api/contacts:id', ProfileCtrl.getContacts);
 
     //auth
     app.post('/auth/register', ac.register)
