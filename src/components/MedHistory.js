@@ -16,15 +16,40 @@ const MedHistory = props => {
         condition_desc: ''
     })
     const [personal_history_list, setPersonalList]=useState([])
-    useEffect(()=>{
-        console.log('hit')
-        axios.get(`/api/personal-history${props.user.patient_id}`).then(results=>setPersonalList(results.data)).catch(err=>console.log(err))
-    }, [])
     const [family_history_list, setFamilyList]=useState([])
-    useEffect(()=>{
-        console.log('hit')
-        axios.get(`/api/family-history${props.user.patient_id}`).then(results=>setFamilyList(results.data)).catch(err=>console.log(err))
+
+    const getPersonalHistory = () => axios.get(`/api/personal-history${props.user.patient_id}`)
+    .then(results => setPersonalList(results.data))
+    .catch(err => console.log(err))
+    useEffect(() => {
+        getPersonalHistory();
+        getFamHistory();
     }, [])
+
+    const getFamHistory = () => axios.get(`/api/fam-history${props.user.patient_id}`)
+    .then(results => setFamilyList(results.data))
+    .catch(err => console.log(err))
+    useEffect(() => {
+        getFamHistory();
+        getPersonalHistory();
+    }, [])
+
+    const deletePersonalHistory =(id)=>{
+        console.log(id)
+        axios.delete (`/api/medicine/${id}`)
+        .then(results=> {
+          getPersonalHistory()
+        }).catch(err=>console.log(err))
+    }
+
+    const deleteFamHistory =(id)=>{
+        console.log(id)
+        axios.delete (`/api/medicine/${id}`)
+        .then(results=> {
+          getFamHistory()
+        }).catch(err=>console.log(err))
+    }
+
     const [toggle, setToggle]=useState(false);
     
         return(
@@ -71,6 +96,7 @@ const MedHistory = props => {
                             <p>{e.condition}</p>
                             <p>{e.cond_desc}</p>
                             <p>{e.date}</p>
+                            <button onClick={() => deletePersonalHistory(e.med_history_id)}>Remove</button>
                         </div>
                     ))}
                 </div>
@@ -115,6 +141,7 @@ const MedHistory = props => {
                             <p>{e.patient_relationship}</p>
                             <p>{e.condition}</p>
                             <p>{e.condition_desc}</p>
+                            <button onClick={() => deleteFamHistory(e.fam_med_id)}>Remove</button>
                         </div>
                     ))}
                 </div>
@@ -123,8 +150,8 @@ const MedHistory = props => {
         )
     }
 
-    const mapStateToProps = state => {
-        return state
+    function mapStateToProps (state) {
+        return {user: state.userReducer.user}
     }
     
     export default connect(mapStateToProps, {getUser})(MedHistory);

@@ -61,9 +61,11 @@ app.use(
 
     //Medical History endpoints
     app.get('/api/personal-history:id', MedHistoryCtrl.getPersonalHistory);
-    app.get('api/family-history:id', MedHistoryCtrl.getFamHistory);
+    app.get('api/fam-history:id', MedHistoryCtrl.getFamHistory);
     app.post('/api/add-personal-history:id', MedHistoryCtrl.postPersonalHistory);
     app.post('/api/add-fam-history:id', MedHistoryCtrl.postFamHistory);
+    app.delete('/api/personal-history:id', MedHistoryCtrl.deletePersonalHistory);
+    app.delete('/api/fam-history:id', MedHistoryCtrl.deleteFamHistory);
 
     //Profile endpoints
     app.get('/api/profile:id', ProfileCtrl.getProfile);
