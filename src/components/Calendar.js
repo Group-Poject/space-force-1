@@ -240,25 +240,36 @@ export default class Calendar extends React.Component {
             let events = filtered.map((e, i) => {
                 let dots = []
                 let meds = () => e.medication ? e.medication.forEach((e, i) => {
-                    dots.push(<p key={i} id='med-dot'></p>)
+                    dots.push(<div>
+                        <p key={i} id='med-dot'></p>
+                        <p>Medication</p>
+                        <p>{e}</p>
+                    </div>)
                 }) : null
                 meds();
                 let apps = () => e.appointment ? e.appointment.forEach((e, i) => {
-                    dots.push(<p key={i} id='app-dot'></p>)
+                    dots.push(<div>
+                        <p key={i} id='app-dot'></p>
+                        <p>Appointment</p>
+                        <p>{e.description}</p>
+                        </div>)
                 }) : null
                 apps()
                     return(
-                        <div className='event-dot-container'>
+                        <div key={i} className={this.state.selectedDay ? 'event-dot-container-column' : 'event-dot-container'}>
                             {dots}
                         </div>
                     )
                 })
             daysInMonth.push(
                 <div key={d} className={className + selectedClass} >
-                    <span onClick={(e)=>{this.onDayClick(e, d)}}>{d}</span>
+                    <span onClick={(e)=>{this.onDayClick(e, d)}}>
+                        <p>{d}</p>
+                        {events[1]}
+                    </span>
                     {this.state.selectedDay ? 
                     <p onClick={() => this.setState({selectedDay: null})}>X</p> : null }
-                    {events[1]}
+                    
                 </div>
             );
         }

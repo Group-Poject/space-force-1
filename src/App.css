@@ -466,11 +466,15 @@ k{
 
 .week-day span{
   display: flex;
+  flex-direction: column;
   width: calc(100% - 4px);
-  height: calc(100% - 20px);
+  height: calc(100% - 4px);
   justify-content: center;
   align-items: center;
   cursor: pointer;
+}
+.week-day span p{
+  display: block;
 }
 
 .zoom span{
@@ -496,6 +500,13 @@ k{
   cursor: pointer;
 }
 
+.zoom span p {
+  position: relative;
+  cursor: initial;
+  top: -8px;
+  left: 0;
+}
+
 .zoom{
   position: fixed;
   top: 25%;
@@ -504,7 +515,8 @@ k{
   width: 50%;
   height: 50%;
   background: white;
-  border: 2px solid #669677
+  border: 2px solid #C3DEB7;
+  /* box-shadow: 0 0 4px 4px #354B3B; */
 }
 
 .event-dot-container{
@@ -512,15 +524,56 @@ k{
   height: 16px;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
+}
+
+.event-dot-container div{
+  width: 100%;
+  height: 16px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.event-dot-container-column{
+  min-height: calc(100% - 20px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  border: 1px solid black;
+  padding: 12px;
+}
+
+.event-dot-container-column div{
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.event-dot-container-column div:nth-child(2n + 1){
+  background: grey
+}
+
+.event-dot-container-column div p{
+  width: 100px;
+  margin-left: 12px;
+  margin-top: 16px;
+  height: auto;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 #med-dot{
   display: block;
   width: 12px;
   height: 12px;
-
   background: white;
   border-radius: 50%;
+  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
+  margin: 2px;
 }
 #app-dot{
   display: block;
@@ -528,6 +581,8 @@ k{
   height: 12px;
   background: red;
   border-radius: 50%;
+  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
+  margin: 2px;
 }
 
 /* First Responder view Styling */
