@@ -28,5 +28,19 @@ module.exports = {
         db.fam_med_hist.add_fam_med_hist(id, patient_relationship, famCondition, condition_desc)
         .then(data => res.status(200).send(data))
         .catch(err => res.status(500).send(err));
+    },
+    deletePersonalHistory: (req, res) => {
+        const {id} = req.params;
+        const db = req.app.get('db');
+        db.pers_med_hist.delete_pers_med_hist(id)
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(500).send(err));
+    },
+    deleteFamHistory: (req, res) => {
+        const {id} = req.params;
+        const db = req.app.get('db');
+        db.fam_med_hist.delete_fam_med_hist(id)
+        .then(data => res.status(200).send(data))
+        .catch(err => res.status(500).send(err));
     }
 }
