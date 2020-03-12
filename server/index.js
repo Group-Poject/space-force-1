@@ -8,6 +8,7 @@ const express = require('express'),
       SurgeryCtrl=require('./controllers/SurgeryCtrl'),
       FRCtrl = require('./controllers/FRCtrl'),
       MedHistoryCtrl = require('./controllers/MedHistoryCtrl'),
+      PcareCtrl = require('./controllers/PcareCtrl'),
       contactsCtrl = require('./controllers/contactsCtrl'),
       ProfileCtrl = require('./controllers/ProfileCtrl'),
       app = express(),
@@ -82,6 +83,12 @@ app.use(
     app.post('/api/contacts:id', contactsCtrl.addContact)
     app.put('/api/contacts:id', contactsCtrl.editContact)
     app.delete('/api/contacts:id', contactsCtrl.deleteContact)
+
+    //pcare
+    app.get('/api/pcare:id',  PcareCtrl.getPcare)
+    app.post('/api/pcare:id', PcareCtrl.addPcare)
+    app.put('/api/pcare:id', PcareCtrl.editPcare)
+    app.delete('/api/pcare:id', PcareCtrl.deletePcare)
     
     // app.use(express.static(__dirname + '/../build'))
     // app.get('*', (req,res)=> {
