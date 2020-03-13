@@ -13,13 +13,20 @@ module.exports = {
   addContact: (req, res) => {
     const { id } = req.params;
     const { email, password, phone_number, has_access, relationship, first_name, last_name } = req.body;
-    const db = req.app.get("db");
+    const db = req.app.get("db")
+    if(password == !null){
     const salt = bcrypt.genSaltSync(10);
-    const hash = bcrypt.hashSync(password, salt);
+    const hash = bcrypt.hashSync(password, salt)
     db.contacts
       .add_contact(email, hash, id, phone_number, has_access, relationship, first_name, last_name)
       .then(data => res.status(200).send(data))
       .catch(err => res.status(500).send(err));
+    } else {
+      db.contacts
+      .add_contact(email, password, id, phone_number, has_access, relationship, first_name, last_name)
+      .then(data => res.status(200).send(data))
+      .catch(err => res.status(500).send(err))
+    }
   },
 
   editContact: (req, res) => {
