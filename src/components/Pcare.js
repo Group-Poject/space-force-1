@@ -20,7 +20,7 @@ const Pcare = props => {
     }, [])
     const deletePcare =(id)=>{
         console.log(id)
-        axios.delete (`/api/pcare/${id}`)
+        axios.delete (`/api/pcare${id}`)
         .then(results=> {
           getPcare()
         }).catch(err=>console.log(err))
@@ -31,8 +31,11 @@ const Pcare = props => {
                 <form 
                     onSubmit={e=>{
                         e.preventDefault()
+                        console.log('hit')
+                        console.log(first_name, last_name)
                         axios.post(`/api/pcare${props.user.patient_id}`, {first_name, last_name, phone_number, email, address}).then(results=>{
-                            setList(results.data)
+                          console.log(results.data)
+                            // setList(results.data)
                             resetValues();
                             getPcare();             
                     })
