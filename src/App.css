@@ -416,8 +416,8 @@ k{
 }
 
 .current-day{
-  border: 2px solid #385F71;
-  color: #385F71;
+  border: 2px solid white;
+  font-weight: bolder;
 }
 
 .legend{
@@ -443,21 +443,40 @@ k{
 
 .color1{
   background: black;
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
 }
 
 .color2{
   background: white;
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
 }
 
 .color3{
   background: rgb(192, 21, 21);
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
 }
 
 .week-day{
   width: 14.2857142857%;
   height: 100%;
   text-align: center;
-  transition: all .5s ease;
+  transition: all .25s ease;
+  border: 1px solid black;
 }
 
 .week-day p{
@@ -467,122 +486,124 @@ k{
 .week-day span{
   display: flex;
   flex-direction: column;
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
+  width: calc(100%);
+  height: calc(100%);
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  transition: all .025s;
 }
+
+.week-day span:hover p{
+  transform: translateY(-5px);
+  margin-bottom: -3px;
+}
+
 .week-day span p{
   display: block;
-}
-
-.zoom span{
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: calc(100% - 32px);
-  height: 100%;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  padding: 16px;
-  cursor: initial;
-}
-
-.zoom p{
-  position: absolute;
-  top: 4px;
-  right: 8px;
-  display: block;
-  width: 16px;
-  cursor: pointer;
-}
-
-.zoom span p {
-  position: relative;
-  cursor: initial;
-  top: -8px;
-  left: 0;
-}
-
-.zoom{
-  position: fixed;
-  top: 25%;
-  left: 25%;
-  z-index: 3;
-  width: 50%;
-  height: 50%;
-  background: white;
-  border: 2px solid #C3DEB7;
-  /* box-shadow: 0 0 4px 4px #354B3B; */
+  height: calc(100% - 32px);
 }
 
 .event-dot-container{
   width: 100%;
   height: 16px;
   display: flex;
-  justify-content: space-evenly;
+  padding: 0 12px;
+  justify-content: flex-start;
   align-items: center;
+  overflow: hidden;
+  align-self: flex-start;
 }
 
 .event-dot-container div{
-  width: 100%;
+  width: 37%;
   height: 16px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
-.event-dot-container-column{
-  min-height: calc(100% - 20px);
-  width: 100%;
+.event-dot-container div div p{
+  position: absolute
+}
+
+#dot-info{
+  display: block;
+}
+
+#none{
+  display: none;
+}
+
+#count{
+  margin-left: 6px;
+  margin-top: -10px;
+  line-height: 10px;
+  font-size: 10px;
+}
+
+
+#dot{
+  display: block;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid black;
+  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
+}
+
+.white{
+  background: white;
+
+}
+.red{
+  background: red;
+}
+
+.day-modal{
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  border: 1px solid black;
-  padding: 12px;
-}
-
-.event-dot-container-column div{
-  height: auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.event-dot-container-column div:nth-child(2n + 1){
-  background: grey
-}
-
-.event-dot-container-column div p{
-  width: 100px;
-  margin-left: 12px;
-  margin-top: 16px;
-  height: auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-#med-dot{
-  display: block;
-  width: 12px;
-  height: 12px;
   background: white;
-  border-radius: 50%;
-  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
-  margin: 2px;
+  border: 1px solid black;
+  z-index: 5;
+  animation: fade-in .5s;
+  padding: 5%;
 }
-#app-dot{
+
+.day-modal div{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.day-modal p{
+  display: flex;
+}
+
+.day-modal #none{
   display: block;
-  width: 12px;
-  height: 12px;
-  background: red;
-  border-radius: 50%;
-  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
-  margin: 2px;
+  width: calc(50% - 12px)
+}
+
+.day-modal #close{
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.none{
+  display: none;
 }
 
 /* First Responder view Styling */
@@ -758,3 +779,12 @@ a{
   100%{height: 250px;}
 }
 
+@keyframes fade-in {
+  0%{opacity: 0; width: 0%; height: 0%; top: 50%; left: 50%}
+  100%{opacity: 1; width: 50%; height: 50%; top: 25%; left: 25%}
+}
+
+/* @keyframes rotate {
+  0%{transform: rotate(0deg);}
+  100%{transform: rotate(10000deg);}
+} */
