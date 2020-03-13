@@ -8,6 +8,7 @@ export default class Calendar extends React.Component {
         showMonthPopup: false,
         showYearPopup: false,
         selectedDay: null,
+        dots: [],
         monthsArray: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         zoomToggle: 'week-day zoom',
         sampleData: [
@@ -205,6 +206,11 @@ export default class Calendar extends React.Component {
         this.props.onDayClick && this.props.onDayClick(e, day);
     }
 
+    setDots = (dots) => {
+        console.log(dots);
+        this.setState({dots})
+    }
+
 
     render() {
         let weekdays = this.weekdaysShort.map((day, i) => {
@@ -224,9 +230,8 @@ export default class Calendar extends React.Component {
         let daysInMonth = [];
         let newDate = new Date();
         for (let d = 1; d <= this.daysInMonth(); d++) {
-            console.log(`${this.state.dateContext.month() + 1}/${d}/${this.state.dateContext.year()}`)
             let className = (d == this.currentDay() && newDate.getMonth() === this.state.dateContext.month() && +this.year() === +newDate.getFullYear() ? "day current-day": "day");
-            let selectedClass = (d == this.state.selectedDay ? " week-day zoom " : " week-day")
+            let selectedClass = (" week-day")
 
             let filtered = ['unchanged']
 
@@ -236,34 +241,43 @@ export default class Calendar extends React.Component {
                     filtered.push(this.state.sampleData[i])
                 }
             }
-            
+            let modalDots = []
             let events = filtered.map((e, i) => {
                 let dots = []
                 let meds = () => e.medication ? e.medication.forEach((e, i) => {
+                    
                     dots.push(<div>
-                        <p key={i} id='med-dot'></p>
-                        <p>Medication</p>
-                        <p>{e}</p>
+                        <p key={i} id='dot' className='white'></p>
+                        <p id='none'>Medication</p>
+                        <p id='none'>{e}</p>
                     </div>)
                 }) : null
                 meds();
                 let apps = () => e.appointment ? e.appointment.forEach((e, i) => {
+                    
                     dots.push(<div>
-                        <p key={i} id='app-dot'></p>
-                        <p>Appointment</p>
-                        <p>{e.description}</p>
+                        <p key={i} id='dot' className='red'></p>
+                        <p id='none'>Appointment</p>
+                        <p id='none'>{e.description}</p>
                         </div>)
                 }) : null
                 apps()
+                modalDots = dots
                     return(
-                        <div key={i} className={this.state.selectedDay ? 'event-dot-container-column' : 'event-dot-container'}>
-                            {dots}
+                        <div key={i} className='event-dot-container'>
+                            <div>
+                                {dots}
+                            </div>
+                        <p id='count'>{dots.length}</p>
                         </div>
                     )
                 })
             daysInMonth.push(
                 <div key={d} className={className + selectedClass} >
-                    <span onClick={(e)=>{this.onDayClick(e, d)}}>
+                    <span id={d} onClick={(e)=>{
+                        this.onDayClick(e, d)
+                        this.setDots(modalDots)
+                        }}>
                         <p>{d}</p>
                         {events[1]}
                     </span>
@@ -325,7 +339,6 @@ export default class Calendar extends React.Component {
                             </div>
                             <div className='legend'>
                                 <p>Legend:</p>
-                                <p><span className='color1'></span>Today</p>
                                 <p><span className='color2'></span>Medications</p>
                                 <p><span className='color3'></span>Appointments</p>
                             </div>
@@ -335,6 +348,12 @@ export default class Calendar extends React.Component {
                             {weekdays}
                         </div>
                         {trElems}
+                        <div className={this.state.selectedDay ? 'day-modal' : 'none'}>
+                            {this.state.dots}
+                            {this.state.selectedDay ? 
+                    <i id='close' className="fas fa-times-circle" onClick={() => this.setState({selectedDay: null})}></i> : null }
+
+                        </div>
                     </div>
                 </div>
 
