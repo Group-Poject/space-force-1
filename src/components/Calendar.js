@@ -348,13 +348,14 @@ export default class Calendar extends React.Component {
                             {weekdays}
                         </div>
                         {trElems}
-                        <div className={this.state.selectedDay ? 'day-modal' : 'none'}>
+                        
+                    </div>
+                    <div className={this.state.selectedDay ? 'day-modal' : 'none'}>
                             {this.state.dots}
                             {this.state.selectedDay ? 
                     <i id='close' className="fas fa-times-circle" onClick={() => this.setState({selectedDay: null})}></i> : null }
 
                         </div>
-                    </div>
                 </div>
 
             </div>
