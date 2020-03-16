@@ -161,8 +161,8 @@ class FRview extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return state
+function mapStateToProps (state) {
+    return {user: state.userReducer.user}
 }
 
 export default connect(mapStateToProps, {getUser})(FRview);
