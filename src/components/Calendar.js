@@ -8,36 +8,55 @@ export default class Calendar extends React.Component {
         showMonthPopup: false,
         showYearPopup: false,
         selectedDay: null,
+        addEvent: false,
         dots: [],
         monthsArray: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         zoomToggle: 'week-day zoom',
         sampleData: [
             {
                 date: "2020-03-09",
-                medication: ['ibuprofen', 'anotha one'],
+                medication: [{
+                    name: 'ibuprofen',
+                    dose: '200mg'
+                }, {
+                    name: 'anotha one',
+                    dose: '20000mg'
+                }],
                 appointment: [{
+                    address: '123 Main St., Provo, UT 84606',
                     description: 'physical',
                     time: '3:00pm'
                 }]
             },
             {
                 date: "2020-03-12",
-                medication: ['ibuprofen'],
+                medication: [{
+                    name: 'ibuprofen',
+                    dose: '200mg'
+                }],
                 appointment: [{
+                    address: '123 Main St., Provo, UT 84606',
                     description: 'physical',
                     time: '3:00pm'
                 }]
             },
             {
                 date: "2020-03-25",
-                medication: ['ibuprofen']
+                medication: [{
+                    name: 'ibuprofen',
+                    dose: '200mg'
+                }]
             },
             {
                 date: "2020-03-26",
                 appointment: [{
-                    description: 'an appointment'
+                    address: '123 Main St., Provo, UT 84606',
+                    description: 'physical',
+                    time: '3:00pm'
                 },{
-                    description: 'anatha appointment'
+                    address: '123 Main St., Provo, UT 84606',
+                    description: 'physical',
+                    time: '3:00pm'
                 }]
             }
         ]
@@ -65,7 +84,6 @@ export default class Calendar extends React.Component {
         return this.state.dateContext.daysInMonth();
     }
     currentDate = () => {
-        console.log("currentDate: ", this.state.dateContext.get("date"));
         return this.state.dateContext.get("date");
     }
     currentDay = () => {
@@ -199,15 +217,12 @@ export default class Calendar extends React.Component {
     onDayClick = (e, day) => {
         this.setState({
             selectedDay: day
-        }, () => {
-            console.log("SELECTED DAY: ", this.state.selectedDay);
         });
 
         this.props.onDayClick && this.props.onDayClick(e, day);
     }
 
     setDots = (dots) => {
-        console.log(dots);
         this.setState({dots})
     }
 
@@ -249,7 +264,8 @@ export default class Calendar extends React.Component {
                     dots.push(<div>
                         <p key={i} id='dot' className='white'></p>
                         <p id='none'>Medication</p>
-                        <p id='none'>{e}</p>
+                        <p id='none'>{e.name}</p>
+                        <p id='none'>{e.dose}</p>
                     </div>)
                 }) : null
                 meds();
@@ -259,6 +275,7 @@ export default class Calendar extends React.Component {
                         <p key={i} id='dot' className='red'></p>
                         <p id='none'>Appointment</p>
                         <p id='none'>{e.description}</p>
+                        <p id='none'>{e.time}</p>
                         </div>)
                 }) : null
                 apps()
@@ -287,8 +304,6 @@ export default class Calendar extends React.Component {
                 </div>
             );
         }
-        
-        console.log("days: ", daysInMonth);
 
         var totalSlots = [...blanks, ...daysInMonth];
         let rows = [];
@@ -329,6 +344,9 @@ export default class Calendar extends React.Component {
                                 <this.YearNav />
                             </div>
                             <div>
+                                <i className="fas fa-plus-square" onClick={() => this.setState({addEvent: !this.state.addEvent})}></i>
+                            </div>
+                            <div>
                                 <i className="prev fa fa-fw fa-chevron-left"
                                     onClick={(e)=> {this.prevMonth()}}>
                                 </i>
@@ -351,11 +369,29 @@ export default class Calendar extends React.Component {
                         
                     </div>
                     <div className={this.state.selectedDay ? 'day-modal' : 'none'}>
-                            {this.state.dots}
+                            <p>{`${this.state.monthsArray[this.state.dateContext.month()]} ${this.state.selectedDay}`}</p>
+                            {this.state.dots.length ? this.state.dots : 'No events for today.'}
                             {this.state.selectedDay ? 
                     <i id='close' className="fas fa-times-circle" onClick={() => this.setState({selectedDay: null})}></i> : null }
 
-                        </div>
+                    </div>
+                    <div className={this.state.addEvent ? 'add-modal' : 'none'}>
+                            <i id='close' className="fas fa-times-circle" onClick={() => this.setState({addEvent: !this.state.addEvent})}></i>
+                            <h3>New Appointment</h3>
+                            <div>
+                                <p>Date: </p>
+                                <input type='date'/>
+                                <p>Time: </p>
+                                <input type='time'/>
+                                <p>Address: </p>
+                                <input type='text'/>
+                            </div>
+                            <div>
+                                <p>Description: </p>
+                                <textarea type='text'/>
+                            </div>
+                            <button>Add Appointment</button>
+                    </div>
                 </div>
 
             </div>
