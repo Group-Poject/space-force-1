@@ -573,13 +573,19 @@ k{
   border: 1px solid black;
   z-index: 5;
   animation: fade-in .5s;
-  padding: 5%;
+  padding: 24px;
 }
 
 .day-modal div{
   display: flex;
   align-items: center;
+  width: 100%;
+  height: 50px;
+  border-radius: 12px;
+  box-shadow: 0px 2px 2px 2px grey;
   justify-content: space-between;
+  margin-bottom: 8px;
+  padding: 4px;
 }
 
 .day-modal p{
@@ -588,7 +594,7 @@ k{
 
 .day-modal #none{
   display: block;
-  width: calc(50% - 12px)
+  width: calc(33% - 12px)
 }
 
 .day-modal #close{
@@ -604,6 +610,90 @@ k{
 
 .none{
   display: none;
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 25%;
+  left: 25%;
+}
+
+.add-modal{
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  background: white;
+  border: 1px solid black;
+  z-index: 5;
+  animation: fade-in .5s;
+  padding: 24px;
+}
+
+.add-modal #close{
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.add-modal div{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 50%;
+  height: 200px;
+}
+
+.add-modal p{
+  width: 30%
+}
+
+.add-modal h3{
+  width: 100%;
+}
+
+.add-modal input{
+  width: 65%;
+  border: none;
+  border-bottom: 2px solid #669677;
+}
+
+.add-modal button{
+  background: white;
+  box-shadow: none;
+  border: 2px solid #669677;
+}
+
+textarea{
+  width: 100%;
+  height: calc(100% - 22px);
+  padding: 4px;
+  border: 2px solid #669677
+}
+
+.fa-plus-square {
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  text-shadow: 2px 2px black;
+}
+
+.fa-plus-square:hover {
+  color: white;
+  transform: translateY(-4px);
+  cursor: pointer;
+  box-shadow: 0px 2px 40px -4px rgba(0,0,0,0.56)
+
 }
 
 /* First Responder view Styling */
