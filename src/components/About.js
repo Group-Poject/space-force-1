@@ -1,15 +1,14 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class About extends Component {
-    render(){
+
+const Profile = props => {
+
         return(
             <main>
-
-                
 
             </main>
         )
     }
-}
 
-export default About;
+    
+    export default Profile;
