@@ -1,2 +1,2 @@
 select * from calendar
-where patient_id = $1
+where patient_id = $1;

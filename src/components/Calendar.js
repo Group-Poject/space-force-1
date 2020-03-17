@@ -1,7 +1,10 @@
 import React, { createRef } from 'react';
 import moment from 'moment';
+import axios from 'axios';
+import {connect} from 'react-redux';
+import {getUser} from '../redux/userReducer';
 
-export default class Calendar extends React.Component {
+class Calendar extends React.Component {
     state = {
         dateContext: moment(),
         today: moment(),
@@ -12,54 +15,85 @@ export default class Calendar extends React.Component {
         dots: [],
         monthsArray: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         zoomToggle: 'week-day zoom',
-        sampleData: [
-            {
-                date: "2020-03-09",
-                medication: [{
-                    name: 'ibuprofen',
-                    dose: '200mg'
-                }, {
-                    name: 'anotha one',
-                    dose: '20000mg'
-                }],
-                appointment: [{
-                    address: '123 Main St., Provo, UT 84606',
-                    description: 'physical',
-                    time: '3:00pm'
-                }]
-            },
-            {
-                date: "2020-03-12",
-                medication: [{
-                    name: 'ibuprofen',
-                    dose: '200mg'
-                }],
-                appointment: [{
-                    address: '123 Main St., Provo, UT 84606',
-                    description: 'physical',
-                    time: '3:00pm'
-                }]
-            },
-            {
-                date: "2020-03-25",
-                medication: [{
-                    name: 'ibuprofen',
-                    dose: '200mg'
-                }]
-            },
-            {
-                date: "2020-03-26",
-                appointment: [{
-                    address: '123 Main St., Provo, UT 84606',
-                    description: 'physical',
-                    time: '3:00pm'
-                },{
-                    address: '123 Main St., Provo, UT 84606',
-                    description: 'physical',
-                    time: '3:00pm'
-                }]
-            }
-        ]
+        dateInput: '',
+        timeInput: '',
+        descriptionInput: '',
+        addressInput: '',
+        appointmentData: []
+    //     sampleData: [
+    //         {
+    //             date: "2020-03-09",
+    //             medication: [{
+    //                 name: 'ibuprofen',
+    //                 dose: '200mg'
+    //             }, {
+    //                 name: 'anotha one',
+    //                 dose: '20000mg'
+    //             }],
+    //             appointment: [{
+    //                 address: '123 Main St., Provo, UT 84606',
+    //                 description: 'physical',
+    //                 time: '3:00pm'
+    //             }]
+    //         },
+    //         {
+    //             date: "2020-03-12",
+    //             medication: [{
+    //                 name: 'ibuprofen',
+    //                 dose: '200mg'
+    //             }],
+    //             appointment: [{
+    //                 address: '123 Main St., Provo, UT 84606',
+    //                 description: 'physical',
+    //                 time: '3:00pm'
+    //             }]
+    //         },
+    //         {
+    //             date: "2020-03-25",
+    //             medication: [{
+    //                 name: 'ibuprofen',
+    //                 dose: '200mg'
+    //             }]
+    //         },
+    //         {
+    //             date: "2020-03-26",
+    //             appointment: [{
+    //                 address: '123 Main St., Provo, UT 84606',
+    //                 description: 'physical',
+    //                 time: '3:00pm'
+    //             },{
+    //                 address: '123 Main St., Provo, UT 84606',
+    //                 description: 'physical',
+    //                 time: '3:00pm'
+    //             }]
+    //         }
+    //     ]
+    }
+
+    componentDidMount(){
+        axios.get(`/api/get-appointments${this.props.user.patient_id}`)
+        .then(res => {
+            this.setState({appointmentData: res.data})
+        })
+        .catch(err => console.log(err));
+    }
+
+    handleInputChange = e => {
+        this.setState({
+            dateInput: e.target.value,
+            timeInput: e.target.value,
+            descriptionInput: e.target.value,
+            addressInput: e.target.value
+        });
+    }
+
+    addAppointment = () => {
+        const {dateInput, timeInput, descriptionInput, addressInput} = this.state
+        axios.post(`/api/add-appointment${this.props.user.patient_id}`, {dateInput, timeInput, descriptionInput, addressInput})
+        .then(() => {
+            this.componentDidMount()
+        })
+        .catch(err => console.log(err))
     }
 
     constructor(props) {
@@ -67,6 +101,7 @@ export default class Calendar extends React.Component {
         this.width = props.width || "350px";
         this.style = props.style || {};
         this.style.width = this.width;
+        this.componentDidMount = this.componentDidMount.bind(this);
     }
 
 
@@ -250,10 +285,10 @@ export default class Calendar extends React.Component {
 
             let filtered = ['unchanged']
 
-            for(let i = 0; i < this.state.sampleData.length; i++){
-                let dateArr = this.state.sampleData[i].date.split('-')
+            for(let i = 0; i < this.state.appointmentData.length; i++){
+                let dateArr = this.state.appointmentData[i].date.split('-')
                 if(+dateArr[2] === +d && +dateArr[1] === (+this.state.dateContext.month() + 1) && +dateArr[0] === +this.state.dateContext.year()){
-                    filtered.push(this.state.sampleData[i])
+                    filtered.push(this.state.appointmentData[i])
                 }
             }
             let modalDots = []
@@ -380,17 +415,21 @@ export default class Calendar extends React.Component {
                             <h3>New Appointment</h3>
                             <div>
                                 <p>Date: </p>
-                                <input type='date'/>
+                                <input type='date' name='dateInput' 
+                                    value={this.state.dateInput} onChange={this.handleInputChange}/>
                                 <p>Time: </p>
-                                <input type='time'/>
+                                <input type='time' name='timeInput'
+                                    value={this.state.timeInput} onChange={this.handleInputChange}/>
                                 <p>Address: </p>
-                                <input type='text'/>
+                                <input type='text' name='addressInput'
+                                    value={this.state.addressInput} onChange={this.handleInputChange}/>
                             </div>
                             <div>
                                 <p>Description: </p>
-                                <textarea type='text'/>
+                                <textarea type='text' name='descriptionInput'
+                                    value={this.state.descriptionInput} onChange={this.handleInputChange}/>
                             </div>
-                            <button>Add Appointment</button>
+                            <button onClick={() => this.addAppointment()}>Add Appointment</button>
                     </div>
                 </div>
 
@@ -400,3 +439,9 @@ export default class Calendar extends React.Component {
         );
     }
 }
+
+function mapStateToProps (state) {
+    return {user: state.userReducer.user}
+}
+
+export default connect(mapStateToProps, {getUser})(Calendar);

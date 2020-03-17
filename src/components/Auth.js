@@ -29,9 +29,9 @@ const Auth = props => {
               e.preventDefault()
               console.log('hit')
               axios.post(`/auth/login`, {email, password}).then(results=>{
-                console.log(results)
                   props.getUser(results.data)
-                  resetValues()              
+                  resetValues()
+                  props.history.push('/dashboard')           
           })
                   .catch(err=>console.log(err))}
           }>
@@ -76,7 +76,8 @@ const Auth = props => {
                 e.preventDefault()
                 axios.post(`/auth/register`, {first_name, last_name, email, password, phone_number, address, birth_date, religious_preference, blood_type}).then(results=>{
                     props.getUser(results.data)
-                    resetValues()              
+                    resetValues()
+                    props.history.push('/dashboard')
             })
                     .catch(err=>console.log(err))}
             }>

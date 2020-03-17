@@ -11,6 +11,7 @@ const express = require('express'),
       PcareCtrl = require('./controllers/PcareCtrl'),
       contactsCtrl = require('./controllers/contactsCtrl'),
       ProfileCtrl = require('./controllers/ProfileCtrl'),
+      CalendarCtrl = require('./controllers/CalendarCtrl'),
       app = express(),
       path = require('path'),
       {SERVER_PORT, CONNECTION_STRING, SESSION_SECRET} = process.env;
@@ -33,6 +34,10 @@ app.use(
     
     
     //endpoints
+    //Calendar endpoints
+    app.post('/api/add-appointment:id', CalendarCtrl.addAppointment)
+    app.get('/api/get-appointments:id', CalendarCtrl.getAppointments)
+
     //Allergy endpoints
     app.get('/api/allergies:id', AllergyCtrl.getAllergies)
     app.post('/api/allergy:id', AllergyCtrl.addAllergy)
