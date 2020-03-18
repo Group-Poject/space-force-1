@@ -137,38 +137,92 @@ main{
 }
 
 /* Dashboard styling */
-
-section{
-  width: 48%;
-  height: 100%;
-  background: #699677;
-  display: flex;
-  flex-direction: column;
-  padding: 16px;
-}
-
 section div{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-container{
-  width: 100%;
-  min-height: 20%;
-  border: 1px solid black;
+section{
+  width: 48%;
+  height: 100%;
+  padding: 16px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  margin: 6px 0;
+  margin: 6px;
   background: white;
+  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
+}
+
+section a{
+  height: 20%;
+  width: 100%;
+}
+
+.overview{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .todays-meds{
   width: 100%;
   height: 100%;
   margin: 8px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
   background: white;
+  overflow-y: auto;
+  padding: 4px;
+  box-shadow: none;
+}
+
+.calendar-overview-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  padding: 8px;
+  margin: 4px 0;
+  border-radius: 16px;
+  box-shadow: 1px 1px 2px 2px rgba(128, 128, 128, 0.5);
+
+}
+
+.calendar-overview-container h4{
+  width: 100%;
+  border-bottom: 2px solid black;
+  margin-bottom: 4px;
+}
+
+.day-card{
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+  padding: 2px 4px;
+}
+
+.day-card p{
+  height: auto;
+  width: 40%;
+}
+#double-width{
+  width: 80%;
+}
+#fifth-width{
+  width: 20%;
+}
+.day-card #dot{
+  margin-right: 4px;
 }
 
 /* Medication styling */
@@ -376,6 +430,8 @@ container{
 
 .month-dropdown{
   height: auto;
+  display: flex;
+  flex-direction: column;
   width: calc(100% - 8px);
   position: absolute;
   top: 24px;

@@ -13,7 +13,55 @@ class Dashboard extends Component {
             monthDisplay: false,
             yearDisplay: false,
             months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
-            days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+            days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+            sampleData: [
+                {
+                    date: "2020-02-09",
+                    medication: [{
+                        name: 'ibuprofen',
+                        dose: '200mg'
+                    }, {
+                        name: 'anotha one',
+                        dose: '20000mg'
+                    }],
+                    appointment: [{
+                        address: '123 Main St., Provo, UT 84606',
+                        description: 'physical',
+                        time: '3:00pm'
+                    }]
+                },
+                {
+                    date: "2020-03-12",
+                    medication: [{
+                        name: 'ibuprofen',
+                        dose: '200mg'
+                    }],
+                    appointment: [{
+                        address: '123 Main St., Provo, UT 84606',
+                        description: 'physical',
+                        time: '3:00pm'
+                    }]
+                },
+                {
+                    date: "2020-03-25",
+                    medication: [{
+                        name: 'ibuprofen',
+                        dose: '200mg'
+                    }]
+                },
+                {
+                    date: "2020-03-26",
+                    appointment: [{
+                        address: '123 Main St., Provo, UT 84606',
+                        description: 'physical',
+                        time: '3:00pm'
+                    },{
+                        address: '123 Main St., Provo, UT 84606',
+                        description: 'physical',
+                        time: '3:00pm'
+                    }]
+                }
+            ]
         }
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -29,7 +77,7 @@ class Dashboard extends Component {
             console.log(res.data)
         })
     }
-
+    
     currentDate = () => {
         let today = new Date();
         let month = today.getMonth() + 1;
@@ -51,6 +99,7 @@ class Dashboard extends Component {
 
     render(){
         const {month, months, year, day, monthDisplay, yearDisplay} = this.state;
+        console.log(month)
         const displayMonths = months.map((e, i) => {
             return(
                 <div key={i} onClick={() => {
@@ -60,16 +109,49 @@ class Dashboard extends Component {
                 </div>
             )
         })
+        const calendar = this.state.sampleData.map((e, i) => {
+            let month = e.date.split('-')[1]
+            let day = e.date.split('-')[2]
+            let year = e.date.split('-')[0]
+            if(+month === +this.state.month){
+                let meds = e.medication ? e.medication.map((m, i) => {
+                    return(
+                        <div className='day-card' key={i}>
+                            <p id='dot' className='white'></p>
+                            <p id='double-width'>{m.name}</p>
+                            <p id='fifth-width'>{m.dose}</p>
+                        </div>
+                    )
+                }) : null
+                let apps = e.appointment ? e.appointment.map((a, i) => {
+                    return(
+                        <div className='day-card' key={i}>
+                            <p id='dot' className='red'></p>
+                            <p>{a.description}</p>
+                            <p>{a.address}</p>
+                            <p id='fifth-width'>{a.time}</p>
+                        </div>
+                    )
+                }) : null
+                return(
+                    <div className='calendar-overview-container'>
+                        <h4>{month}/{day}/{year}</h4>
+                        {meds}
+                        {apps}
+                    </div>
+                )
+            }
+        })
         return(
             <main>
 
                 <section>
                     <div>
-                        <div>
+                        <div className='nav-month'>
                             {
                                 monthDisplay
                                 ?
-                                <div onClick={this.displayMonths}>
+                                <div className='month-dropdown' onClick={this.displayMonths}>
                                     {months[month - 1]}
                                     {displayMonths}
                                 </div>
@@ -96,49 +178,50 @@ class Dashboard extends Component {
 
                         <div>
                             <i className="prev fa fa-fw fa-chevron-left"
-                                onClick={() => console.log('left')}>
+                                onClick={() => this.setState({month: this.state.month - 1})}>
                             </i>
                             <i className="prev fa fa-fw fa-chevron-right"
-                                onClick={() => console.log('right')}>
+                                onClick={() => this.setState({month: this.state.month + 1})}>
                             </i>
                         </div>
                     </div>
-                    <container className='todays-meds'>
-                        todays meds
-                    </container>
+                    <section className='todays-meds'>
+                        {calendar}
+                    </section>
 
                 </section>
 
                 <section>
 
-                    <Link to='/primary-care'>
-                    <container>
-                        pcare
-                    </container>
-                    </Link>
-
                     <Link to='/meds'>
-                    <container>
-                        meds
-                    </container>
+                    <section className='overview'>
+                        <h3>Medications</h3>
+                    </section>
                     </Link>
 
                     <Link to='/allergies'>
-                    <container>
+                    <section className='overview'>
+                        <h3>Allergies</h3>
                         allergies
-                    </container>
+                    </section>
                     </Link>
 
                     <Link to='/surgeries'>
-                    <container>
-                        surgeries
-                    </container>
+                    <section className='overview'>
+                        <h3>Surgeries</h3>
+                    </section>
                     </Link>
 
                     <Link to='/med-history'>
-                    <container>
-                        medical history fam and personal
-                    </container>
+                    <section className='overview'>
+                        <h3>Medical History</h3>
+                    </section>
+                    </Link>
+
+                    <Link to='/primary-care'>
+                    <section className='overview'>
+                        <h3>Primary Care Physician</h3>
+                    </section>
                     </Link>
 
                 </section>
