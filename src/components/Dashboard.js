@@ -60,6 +60,30 @@ class Dashboard extends Component {
                         description: 'physical',
                         time: '3:00pm'
                     }]
+                },
+                {
+                    date: "2020-03-06",
+                    appointment: [{
+                        address: '123 Main St., Provo, UT 84606',
+                        description: 'physical',
+                        time: '3:00pm'
+                    },{
+                        address: '123 Main St., Provo, UT 84606',
+                        description: 'physical',
+                        time: '3:00pm'
+                    }]
+                },
+                {
+                    date: "2020-03-16",
+                    appointment: [{
+                        address: '123 Main St., Provo, UT 84606',
+                        description: 'physical',
+                        time: '3:00pm'
+                    },{
+                        address: '123 Main St., Provo, UT 84606',
+                        description: 'physical',
+                        time: '3:00pm'
+                    }]
                 }
             ]
         }
@@ -98,11 +122,11 @@ class Dashboard extends Component {
     }
 
     render(){
-        const {month, months, year, day, monthDisplay, yearDisplay} = this.state;
-        console.log(month)
+        const {month, months, year, monthDisplay, yearDisplay} = this.state;
+        // console.log(month)
         const displayMonths = months.map((e, i) => {
             return(
-                <div key={i} onClick={() => {
+                <div className='label-month' key={i} onClick={() => {
                     this.setState({month: i + 1})
                     this.displayMonths()}}>
                     {e}
@@ -110,9 +134,9 @@ class Dashboard extends Component {
             )
         })
         const calendar = this.state.sampleData.map((e, i) => {
-            let month = e.date.split('-')[1]
-            let day = e.date.split('-')[2]
-            let year = e.date.split('-')[0]
+            let month = e.date.split('-')[1];
+            let day = e.date.split('-')[2];
+            let year = e.date.split('-')[0];
             if(+month === +this.state.month){
                 let meds = e.medication ? e.medication.map((m, i) => {
                     return(
@@ -139,9 +163,11 @@ class Dashboard extends Component {
                         {meds}
                         {apps}
                     </div>
-                )
+                )                
             }
+
         })
+        
         return(
             <main>
 
@@ -151,8 +177,8 @@ class Dashboard extends Component {
                             {
                                 monthDisplay
                                 ?
-                                <div className='month-dropdown' onClick={this.displayMonths}>
-                                    {months[month - 1]}
+                                <div id='month-dropdown' onClick={this.displayMonths}>
+                                    {/* {months[month - 1]} */}
                                     {displayMonths}
                                 </div>
                                 :
@@ -171,22 +197,21 @@ class Dashboard extends Component {
                                 <div onClick={this.displayYears}>{year}</div>
                             }
                         </div>
-
-                        <div>
-                            {day}
-                        </div>
-
                         <div>
                             <i className="prev fa fa-fw fa-chevron-left"
-                                onClick={() => this.setState({month: this.state.month - 1})}>
+                                onClick={() => this.state.month === 1 ? this.setState({month: 12}) : this.setState({month: this.state.month - 1})}>
                             </i>
                             <i className="prev fa fa-fw fa-chevron-right"
-                                onClick={() => this.setState({month: this.state.month + 1})}>
+                                onClick={() => this.state.month === 12 ? this.setState({month: 1}) : this.setState({month: this.state.month + 1})}>
                             </i>
                         </div>
                     </div>
                     <section className='todays-meds'>
-                        {calendar}
+                        {calendar.length ? calendar : (
+                            <div className='day-card'>
+                                <h4>No events for {this.state.months[this.state.month - 1]}</h4>
+                            </div>
+                        )}
                     </section>
 
                 </section>
